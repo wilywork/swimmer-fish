@@ -1,2 +1,4 @@
 swimmer-fish/Debug/*
 *.vs*
+swimmer-fish/x64/*
+swimmer-fish/x84/*
