@@ -22,5 +22,7 @@ int main() {
     SDL_DestroyWindow(janela);
     SDL_Quit();
 
+    // alo
+
 	return 0;
 }
