@@ -79,7 +79,7 @@ int main()
         destinoPeixe.w = 100;
         destinoPeixe.h = 100;
         destinoPeixe.x = 50;
-        destinoPeixe.y = peixeMov * 3;
+        destinoPeixe.y =  peixeMov * 4;
         if (destinoPeixe.y >= 520) {
             destinoPeixe.y = 520;
         }
@@ -98,18 +98,20 @@ int main()
         SDL_Rect destinoCoral;
         destinoCoral.w = 40;
         destinoCoral.h = 60 * (404 / 122);
-        destinoCoral.x = 700 - (coralMov * 5);
-        destinoCoral.y = 600 - destinoCoral.h;
+        destinoCoral.x =  750 - (coralMov * 5);
+        destinoCoral.y =  600 - destinoCoral.h;
         SDL_RenderCopy(renderizador, coral, NULL, &destinoCoral);
         coralMov++;
         if (destinoCoral.x <= -100) {
             coralMov = 0;
         }
 
-        if (destinoPeixe.y + destinoPeixe.h > destinoCoral.y) {
-            if (destinoPeixe.x + destinoPeixe.w > destinoCoral.x) {
-                cout << "TESTE" << endl;
-                peixeMov = 0;
+        if (destinoPeixe.y + destinoPeixe.h > destinoCoral.y+10) {
+            if (destinoPeixe.x + destinoPeixe.w > destinoCoral.x+5) {
+                if (destinoPeixe.x < destinoCoral.x + destinoCoral.w) {
+                    cout << "TESTE" << endl;
+                    peixeMov = 0;
+                }
             }
         }
 
