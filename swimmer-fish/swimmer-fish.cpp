@@ -19,22 +19,26 @@ SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
     return textura;
 };
 
-void HitBoxCoral(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &peixeMov) {
+void HitBoxCoral(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &peixeMov, int &score, int &TAMpeixe) {
     if (destinoPeixe.y + destinoPeixe.h > destinoComida.y) {
         if (destinoPeixe.x + destinoPeixe.w > destinoComida.x) {
             if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
                 peixeMov = 0;
+                score = 0;
+                TAMpeixe = 100;
             }
         }
     }
 };
 
-void HitBoxComida(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &TAMpeixe, int & comidaMov) {
+void HitBoxComida(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &TAMpeixe, int &comidaMov, int &score) {
     if (destinoPeixe.y + destinoPeixe.h > destinoComida.y + 10) {
         if (destinoPeixe.x + destinoPeixe.w > destinoComida.x + 5) {
             if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
                 TAMpeixe += 10;
                 comidaMov = 0;
+                score++;
+                cout << "Score:" << score << endl;
 
             }
         }
@@ -53,7 +57,6 @@ void FuncEventos(bool &gameOver,int &peixeMov ) {
             switch (evento.key.keysym.sym) {
             case SDLK_UP:
             case SDLK_w:
-                cout << "CIMA" << endl;
                 peixeMov -= 30;
                 break;
             }
@@ -93,6 +96,7 @@ int main()
     int coralMov = 0;
     int TAMpeixe = 100;
     int comidaMov = 0;
+    int score = 0;
     while (!gameOver) {
 
         FuncEventos(gameOver, peixeMov);
@@ -141,9 +145,9 @@ int main()
             comidaMov = 0;
         }
         SDL_RenderCopy(renderizador, comida, NULL, &destinoComida);
-        HitBoxComida(destinoComida, destinoPeixe, TAMpeixe, comidaMov);
 
-        HitBoxCoral(destinoCoral, destinoPeixe, peixeMov);
+        HitBoxComida(destinoComida, destinoPeixe, TAMpeixe, comidaMov, score);
+        HitBoxCoral(destinoCoral, destinoPeixe, peixeMov, score, TAMpeixe);
 
         SDL_RenderPresent(renderizador); // Cola coisas na janela
         SDL_Delay(1000 / 60); // 60 fps
