@@ -19,6 +19,48 @@ SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
     return textura;
 };
 
+void HitBoxCoral(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &peixeMov) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoComida.y) {
+        if (destinoPeixe.x + destinoPeixe.w > destinoComida.x) {
+            if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
+                peixeMov = 0;
+            }
+        }
+    }
+};
+
+void HitBoxComida(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &TAMpeixe, int & comidaMov) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoComida.y + 10) {
+        if (destinoPeixe.x + destinoPeixe.w > destinoComida.x + 5) {
+            if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
+                TAMpeixe += 10;
+                comidaMov = 0;
+
+            }
+        }
+    }
+};
+
+void FuncEventos(bool &gameOver,int &peixeMov ) {
+    SDL_Event evento;
+    while (SDL_PollEvent(&evento)) {
+        switch (evento.type) {
+        case SDL_QUIT:
+            gameOver = true;
+            break;
+
+        case SDL_KEYDOWN:
+            switch (evento.key.keysym.sym) {
+            case SDLK_UP:
+            case SDLK_w:
+                cout << "CIMA" << endl;
+                peixeMov -= 30;
+                break;
+            }
+            break;
+        }
+    }
+};
 
 int main()
 {
@@ -40,35 +82,20 @@ int main()
         SDL_RENDERER_ACCELERATED);
 
     // Imagens renderizadas
-
     SDL_Texture* fundo = CarregaTextura("imagens/fundoJogo.bmp", renderizador);
     SDL_Texture* peixe = CarregaTextura("imagens/peixe.bmp", renderizador);
     SDL_Texture* coral = CarregaTextura("imagens/coral.bmp", renderizador);
+    SDL_Texture* comida = CarregaTextura("imagens/comida.bmp", renderizador);
 
     bool gameOver = false; // Variavel para manter o jogo aberto
 
     int peixeMov = 0;
     int coralMov = 0;
+    int TAMpeixe = 100;
+    int comidaMov = 0;
     while (!gameOver) {
 
-        SDL_Event evento;
-        while (SDL_PollEvent(&evento)) {
-            switch (evento.type) {
-            case SDL_QUIT:
-                gameOver = true;
-                break;
-
-            case SDL_KEYDOWN:
-                switch (evento.key.keysym.sym) {
-                case SDLK_UP:
-                case SDLK_w:
-                    cout << "CIMA" << endl;
-                    peixeMov -= 30;
-                    break;
-                }
-                break;
-            }
-        }
+        FuncEventos(gameOver, peixeMov);
 
         SDL_RenderClear(renderizador); // Limpa a janela
 
@@ -76,8 +103,8 @@ int main()
         SDL_RenderCopy(renderizador, fundo, NULL, NULL);
 
         SDL_Rect destinoPeixe;
-        destinoPeixe.w = 100;
-        destinoPeixe.h = 100;
+        destinoPeixe.w = TAMpeixe;
+        destinoPeixe.h = TAMpeixe;
         destinoPeixe.x = 50;
         destinoPeixe.y =  peixeMov * 4;
         if (destinoPeixe.y >= 520) {
@@ -93,8 +120,6 @@ int main()
         }
         SDL_RenderCopy(renderizador, peixe, NULL, &destinoPeixe);
 
-
-
         SDL_Rect destinoCoral;
         destinoCoral.w = 40;
         destinoCoral.h = 60 * (404 / 122);
@@ -106,14 +131,19 @@ int main()
             coralMov = 0;
         }
 
-        if (destinoPeixe.y + destinoPeixe.h > destinoCoral.y+10) {
-            if (destinoPeixe.x + destinoPeixe.w > destinoCoral.x+5) {
-                if (destinoPeixe.x < destinoCoral.x + destinoCoral.w) {
-                    cout << "TESTE" << endl;
-                    peixeMov = 0;
-                }
-            }
+        SDL_Rect destinoComida;
+        destinoComida.w = 10;
+        destinoComida.h = 10;
+        destinoComida.x = 750 - (comidaMov * 8);
+        destinoComida.y = 400;
+        comidaMov++;
+        if (destinoComida.x <= -100) {
+            comidaMov = 0;
         }
+        SDL_RenderCopy(renderizador, comida, NULL, &destinoComida);
+        HitBoxComida(destinoComida, destinoPeixe, TAMpeixe, comidaMov);
+
+        HitBoxCoral(destinoCoral, destinoPeixe, peixeMov);
 
         SDL_RenderPresent(renderizador); // Cola coisas na janela
         SDL_Delay(1000 / 60); // 60 fps
