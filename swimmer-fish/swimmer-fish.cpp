@@ -19,10 +19,10 @@ SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
     return textura;
 };
 
-void HitBoxCoral(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &peixeMov, int &score, int &TAMpeixe) {
-    if (destinoPeixe.y + destinoPeixe.h > destinoComida.y) {
-        if (destinoPeixe.x + destinoPeixe.w > destinoComida.x) {
-            if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
+void HitBoxCoral(SDL_Rect destinoCoral, SDL_Rect destinoPeixe, int &peixeMov, int &score, int &TAMpeixe) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoCoral.y + 10) {
+        if (destinoPeixe.x + destinoPeixe.w > destinoCoral.x + 5) {
+            if (destinoPeixe.x < destinoCoral.x + destinoCoral.w) {
                 peixeMov = 0;
                 score = 0;
                 TAMpeixe = 100;
@@ -32,14 +32,44 @@ void HitBoxCoral(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &peixeMov, i
 };
 
 void HitBoxComida(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &TAMpeixe, int &comidaMov, int &score) {
-    if (destinoPeixe.y + destinoPeixe.h > destinoComida.y + 10) {
-        if (destinoPeixe.x + destinoPeixe.w > destinoComida.x + 5) {
-            if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
-                TAMpeixe += 10;
-                comidaMov = 0;
-                score++;
-                cout << "Score:" << score << endl;
+    if (destinoPeixe.y + destinoPeixe.h > destinoComida.y) {
+        if (destinoPeixe.y < destinoComida.y + destinoComida.h) {
+            if (destinoPeixe.x + destinoPeixe.w > destinoComida.x) {
+                if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
+                    TAMpeixe += 10;
+                    comidaMov = 0;
+                    score++;
+                    cout << "Score:" << score << endl;
 
+                }
+            }
+        }
+    }
+};
+
+void HitBoxLinha(SDL_Rect destinoLinha, SDL_Rect destinoPeixe, int& peixeMov, int& score, int& TAMpeixe) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoLinha.y) {
+        if (destinoPeixe.y < destinoLinha.y + destinoLinha.h) {
+            if (destinoPeixe.x + destinoPeixe.w > destinoLinha.x) {
+                if (destinoPeixe.x < destinoLinha.x + destinoLinha.w) {
+                    peixeMov = 0;
+                    score = 0;
+                    TAMpeixe = 100;
+                }
+            }
+        }
+    }
+};
+
+void HitBoxAnzol(SDL_Rect destinoAnzol, SDL_Rect destinoPeixe, int& peixeMov, int& score, int& TAMpeixe) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoAnzol.y) {
+        if (destinoPeixe.y < destinoAnzol.y + destinoAnzol.h) {
+            if (destinoPeixe.x + destinoPeixe.w > destinoAnzol.x) {
+                if (destinoPeixe.x < destinoAnzol.x + destinoAnzol.w) {
+                    peixeMov = 0;
+                    score = 0;
+                    TAMpeixe = 100;
+                }
             }
         }
     }
@@ -89,6 +119,8 @@ int main()
     SDL_Texture* peixe = CarregaTextura("imagens/peixe.bmp", renderizador);
     SDL_Texture* coral = CarregaTextura("imagens/coral.bmp", renderizador);
     SDL_Texture* comida = CarregaTextura("imagens/comida.bmp", renderizador);
+    SDL_Texture* linha = CarregaTextura("imagens/linha.bmp", renderizador);
+    SDL_Texture* anzol = CarregaTextura("imagens/anzol.bmp", renderizador);
 
     bool gameOver = false; // Variavel para manter o jogo aberto
 
@@ -97,6 +129,8 @@ int main()
     int TAMpeixe = 100;
     int comidaMov = 0;
     int score = 0;
+    int linhaMov = 0;
+    int TAMlinhaH = 0;
     while (!gameOver) {
 
         FuncEventos(gameOver, peixeMov);
@@ -106,6 +140,7 @@ int main()
 
         SDL_RenderCopy(renderizador, fundo, NULL, NULL);
 
+        //Peixe
         SDL_Rect destinoPeixe;
         destinoPeixe.w = TAMpeixe;
         destinoPeixe.h = TAMpeixe;
@@ -124,17 +159,19 @@ int main()
         }
         SDL_RenderCopy(renderizador, peixe, NULL, &destinoPeixe);
 
+        //coral
         SDL_Rect destinoCoral;
         destinoCoral.w = 40;
         destinoCoral.h = 60 * (404 / 122);
         destinoCoral.x =  750 - (coralMov * 5);
         destinoCoral.y =  600 - destinoCoral.h;
-        SDL_RenderCopy(renderizador, coral, NULL, &destinoCoral);
         coralMov++;
         if (destinoCoral.x <= -100) {
             coralMov = 0;
         }
+        SDL_RenderCopy(renderizador, coral, NULL, &destinoCoral);
 
+        //comida
         SDL_Rect destinoComida;
         destinoComida.w = 10;
         destinoComida.h = 10;
@@ -146,8 +183,36 @@ int main()
         }
         SDL_RenderCopy(renderizador, comida, NULL, &destinoComida);
 
+        //linha
+        SDL_Rect destinoLinha;
+        destinoLinha.w = 3;
+        destinoLinha.h = 10 + (TAMlinhaH * 4);
+        destinoLinha.x = 850 - (linhaMov * 3);
+        destinoLinha.y = 0;
+        linhaMov++;
+        if (destinoLinha.x <= -100) {
+            linhaMov = 0;
+        }
+        TAMlinhaH++;
+        if (destinoLinha.h >= destinoCoral.h + 50) {
+            TAMlinhaH = 0;
+        }
+        SDL_RenderCopy(renderizador, linha, NULL, &destinoLinha);
+
+        //Azol
+        SDL_Rect destinoAnzol;
+        destinoAnzol.w = 25;
+        destinoAnzol.h = 25;
+        destinoAnzol.x = destinoLinha.x -13;
+        destinoAnzol.y = destinoLinha.h;
+        SDL_RenderCopy(renderizador, anzol, NULL, &destinoAnzol);
+
+
+        //HitBox
         HitBoxComida(destinoComida, destinoPeixe, TAMpeixe, comidaMov, score);
         HitBoxCoral(destinoCoral, destinoPeixe, peixeMov, score, TAMpeixe);
+        HitBoxLinha(destinoLinha, destinoPeixe, peixeMov, score, TAMpeixe);
+        HitBoxLinha(destinoAnzol, destinoPeixe, peixeMov, score, TAMpeixe);
 
         SDL_RenderPresent(renderizador); // Cola coisas na janela
         SDL_Delay(1000 / 60); // 60 fps
