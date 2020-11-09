@@ -1,9 +1,11 @@
 // https://www.youtube.com/watch?v=IDa8hfl_9Vk&t=217s&ab_channel=elieserdejesus
 #include <iostream>
 #include <string.h>
-#define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <time.h>
+
+#define SDL_MAIN_HANDLED
+
 using namespace std;
 
 SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
