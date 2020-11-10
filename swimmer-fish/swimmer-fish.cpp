@@ -1,12 +1,14 @@
 // https://www.youtube.com/watch?v=IDa8hfl_9Vk&t=217s&ab_channel=elieserdejesus
+#define SDL_MAIN_HANDLED
+
 #include <iostream>
 #include <string.h>
 #include <SDL.h>
 #include <time.h>
 
-#define SDL_MAIN_HANDLED
-
 using namespace std;
+
+// ============ FUNCOES ============
 
 SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
 {
@@ -125,24 +127,22 @@ void FuncEventos(bool &gameOver,int &peixeMov ) {
     }
 };
 
+// ============ FIM FUNCOES ============
 int main()
 {
+    bool jogoAtivo = true;
+    bool menuAtivo = true;
 
     SDL_Window* janela;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) // Inicia a SDL
         cout << SDL_GetError() << endl;
 
-    janela = SDL_CreateWindow("Janela", // inicia a JANELA
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        800,
-        600,
-        0);
+    // inicia a JANELA
+    janela = SDL_CreateWindow("Janela", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
 
-    SDL_Renderer* renderizador = SDL_CreateRenderer(janela, // Renderiza coisas na janela
-        -1,
-        SDL_RENDERER_ACCELERATED);
+    // Renderiza coisas na janela
+    SDL_Renderer* renderizador = SDL_CreateRenderer(janela, -1, SDL_RENDERER_ACCELERATED);
 
     // Imagens renderizadas
     SDL_Texture* fundo = CarregaTextura("imagens/fundoJogo.bmp", renderizador);
@@ -154,7 +154,8 @@ int main()
 
     srand(time(NULL));
 
-    bool gameOver = false; // Variavel para manter o jogo aberto
+    // Variavel para manter o jogo aberto
+    bool gameOver = false;
 
     int peixeMov = 0;
     int coralMov = 0;
@@ -165,8 +166,25 @@ int main()
     int TAMlinhaH = 0;
     int comidaRandY = 250;
     int TAMcoral = 30;
-    while (!gameOver) {
 
+    SDL_RenderCopy(renderizador, CarregaTextura("imagens/play.bmp", renderizador), NULL, NULL);
+    // Cola coisas na janela
+    SDL_RenderPresent(renderizador);
+    SDL_Delay(1000 / 60); // 60 fps
+
+    while (menuAtivo) {
+        SDL_Event evento;
+
+        SDL_PollEvent(&evento);
+
+        if (evento.type == SDL_KEYDOWN) {
+            if (evento.key.keysym.sym == SDLK_KP_ENTER || evento.key.keysym.sym == SDLK_RETURN) {
+                menuAtivo = false;
+            }
+        }
+    }
+
+    while (!gameOver) {
 
         FuncEventos(gameOver, peixeMov);
 
