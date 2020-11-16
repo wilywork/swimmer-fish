@@ -54,7 +54,7 @@ void HitBoxComida(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &TAMpeixe, 
         if (destinoPeixe.y < destinoComida.y + destinoComida.h) {
             if (destinoPeixe.x + destinoPeixe.w > destinoComida.x) {
                 if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
-                    TAMpeixe += 10;
+                    TAMpeixe += 5;
                     comidaMov = 0;
                     score++;
                     cout << "Score:" << score << endl;
@@ -151,6 +151,8 @@ int main()
     SDL_Texture* comida = CarregaTextura("imagens/comida.bmp", renderizador);
     SDL_Texture* linha = CarregaTextura("imagens/linha.bmp", renderizador);
     SDL_Texture* anzol = CarregaTextura("imagens/anzol.bmp", renderizador);
+    SDL_Texture* numeros = CarregaTextura("imagens/numeros2.bmp", renderizador);
+    SDL_Texture* scoreIMG = CarregaTextura("imagens/score.bmp", renderizador);
 
     srand(time(NULL));
 
@@ -166,6 +168,8 @@ int main()
     int TAMlinhaH = 0;
     int comidaRandY = 250;
     int TAMcoral = 30;
+    int NUM = 0;
+    int scoreDezena = 0;
 
     SDL_RenderCopy(renderizador, CarregaTextura("imagens/play.bmp", renderizador), NULL, NULL);
     // Cola coisas na janela
@@ -257,6 +261,56 @@ int main()
         destinoAnzol.x = destinoLinha.x -13;
         destinoAnzol.y = destinoLinha.h;
         SDL_RenderCopy(renderizador, anzol, NULL, &destinoAnzol);
+
+        //Numeros do score
+        if (score % 10 <= 4) {
+            NUM = 0;
+
+        }
+        if (score % 10 >= 5) {
+            NUM = 1;
+        }
+        SDL_Rect origemNumeros;
+        origemNumeros.x = 62 * (score % 5);
+        origemNumeros.y = 79 * NUM;
+        origemNumeros.w = 62;
+        origemNumeros.h = 79;
+        SDL_Rect destinoNumeros;
+        destinoNumeros.w = 33;
+        destinoNumeros.h = 33;
+        destinoNumeros.x = 750;
+        destinoNumeros.y = 20;
+        SDL_RenderCopy(renderizador, numeros, &origemNumeros, &destinoNumeros);
+
+        if (score >= 10) {
+            scoreDezena = score / 10;
+            if (scoreDezena <= 4) {
+                NUM = 0;
+
+            }
+            if (scoreDezena >= 5) {
+                NUM = 1;
+            }
+            SDL_Rect origemNumeros;
+            origemNumeros.x = 62 * scoreDezena;
+            origemNumeros.y = 79 * NUM;
+            origemNumeros.w = 62;
+            origemNumeros.h = 79;
+            SDL_Rect destinoNumeros;
+            destinoNumeros.w = 33;
+            destinoNumeros.h = 33;
+            destinoNumeros.x = 715;
+            destinoNumeros.y = 20;
+            SDL_RenderCopy(renderizador, numeros, &origemNumeros, &destinoNumeros);
+        }
+
+        // Placa de score
+        SDL_Rect destinoScore;
+        destinoScore.w = 87;
+        destinoScore.h = 34;
+        destinoScore.x = 623;
+        destinoScore.y = 20;
+        SDL_RenderCopy(renderizador, scoreIMG, NULL, &destinoScore);
 
 
         //HitBox
