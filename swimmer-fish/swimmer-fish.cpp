@@ -5,6 +5,8 @@
 #include <string.h>
 #include <SDL.h>
 #include <time.h>
+#include "HitBox.h"
+
 
 using namespace std;
 
@@ -24,7 +26,7 @@ SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
     return textura;
 };
 
-int RandTamCoral() {
+/*int RandTamCoral() {
         int TAMcoral = rand() % 100;
         while (TAMcoral < 30) {
             TAMcoral = rand() % 100;
@@ -103,7 +105,7 @@ void HitBoxAnzol(SDL_Rect destinoAnzol, SDL_Rect destinoPeixe, int& peixeMov, in
             }
         }
     }
-};
+};*/
 
 void FuncEventos(bool &gameOver,int &peixeMov ) {
     SDL_Event evento;
