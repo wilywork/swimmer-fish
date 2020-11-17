@@ -74,7 +74,7 @@ int main()
     SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
     SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
     SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
-    SDL_Texture* numeros = CarregaTextura("assets/magens/numeros2.bmp", renderizador);
+    SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
     SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
     SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
     SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
@@ -115,6 +115,8 @@ int main()
         }
     }
 
+    int MOVfundo2 = 0;
+
     while (!gameOver) {
 
         FuncEventos(gameOver, peixeMov);
@@ -122,7 +124,30 @@ int main()
         SDL_RenderClear(renderizador); // Limpa a janela
 
         SDL_RenderCopy(renderizador, fundo1, NULL, NULL);
-        SDL_RenderCopy(renderizador, fundo2, NULL, NULL);
+
+        if (MOVfundo2 <= -800) {
+            MOVfundo2 = 0;
+        }
+        //Fundo 2
+        SDL_Rect destinoFundo2;
+        destinoFundo2.w = 800;
+        destinoFundo2.h = 353;
+        destinoFundo2.x = 0 + MOVfundo2;
+        destinoFundo2.y = 0;
+        MOVfundo2 -= 2;
+        SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundo2);
+        //Fundo 2
+        SDL_Rect destinoFundoEspelho;
+        destinoFundoEspelho.w = 800;
+        destinoFundoEspelho.h = 353;
+        destinoFundoEspelho.x = 800 + MOVfundo2;
+        destinoFundoEspelho.y = 0;
+        SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundoEspelho);
+
+
+
+
+
         SDL_RenderCopy(renderizador, fundo3, NULL, NULL);
         SDL_RenderCopy(renderizador, fundo4, NULL, NULL);
 
