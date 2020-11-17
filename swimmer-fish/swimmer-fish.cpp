@@ -79,7 +79,7 @@ int main()
     SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
     SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
     SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
-    SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.bmp", renderizador);
+    SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.1.bmp", renderizador);
 
     srand(time(NULL));
 
