@@ -117,6 +117,7 @@ int main()
 
     int MOVfundo2 = 0;
     int MOVfundo3 = 0;
+    int MOVfundo4 = 0;
 
     while (!gameOver) {
 
@@ -163,8 +164,24 @@ int main()
         SDL_RenderCopy(renderizador, fundo3, NULL, &destinoFundo3Espelho);
 
 
+        //Fundo 4
+        if (MOVfundo4 <= -800) {
+            MOVfundo4 = 0;
+        }
+        SDL_Rect destinoFundo4;
+        destinoFundo4.w = 800;
+        destinoFundo4.h = 400;
+        destinoFundo4.x = 0 + MOVfundo4;
+        destinoFundo4.y = 200;
+        MOVfundo4 -= 5;
+        SDL_RenderCopy(renderizador, fundo4, NULL, &destinoFundo4);
+        SDL_Rect destinoFundo4Espelho;
+        destinoFundo4Espelho.w = 800;
+        destinoFundo4Espelho.h = 400;
+        destinoFundo4Espelho.x = 800 + MOVfundo4;
+        destinoFundo4Espelho.y = 200;
+        SDL_RenderCopy(renderizador, fundo4, NULL, &destinoFundo4Espelho);
 
-        SDL_RenderCopy(renderizador, fundo4, NULL, NULL);
 
 
         //Peixe
@@ -187,7 +204,7 @@ int main()
         SDL_Rect destinoCoral;
         destinoCoral.w = 40;
         destinoCoral.h = TAMcoral * (404 / 122);
-        destinoCoral.x =  750 - (coralMov * 5);
+        destinoCoral.x =  750 - (coralMov * 7);
         destinoCoral.y =  600 - destinoCoral.h;
         coralMov++;
         if (destinoCoral.x <= -100) {
