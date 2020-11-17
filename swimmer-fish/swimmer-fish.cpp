@@ -41,7 +41,7 @@ void FuncEventos(bool &gameOver,int &peixeMov, int &pressUpPeixe) {
             case SDLK_w:
                 if (peixeMov >= 0) {
                     pressUpPeixe = true;
-                    peixeMov -= 10;
+                    peixeMov -= 15;
                 }
                 break;
             }
