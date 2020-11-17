@@ -147,14 +147,14 @@ int main()
     SDL_Renderer* renderizador = SDL_CreateRenderer(janela, -1, SDL_RENDERER_ACCELERATED);
 
     // Imagens renderizadas
-    SDL_Texture* fundo = CarregaTextura("imagens/fundoJogo.bmp", renderizador);
-    SDL_Texture* peixe = CarregaTextura("imagens/peixe.bmp", renderizador);
-    SDL_Texture* coral = CarregaTextura("imagens/coral.bmp", renderizador);
-    SDL_Texture* comida = CarregaTextura("imagens/comida.bmp", renderizador);
-    SDL_Texture* linha = CarregaTextura("imagens/linha.bmp", renderizador);
-    SDL_Texture* anzol = CarregaTextura("imagens/anzol.bmp", renderizador);
-    SDL_Texture* numeros = CarregaTextura("imagens/numeros2.bmp", renderizador);
-    SDL_Texture* scoreIMG = CarregaTextura("imagens/score.bmp", renderizador);
+    SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
+    SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
+    SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
+    SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
+    SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
+    SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
+    SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
+    SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
 
     srand(time(NULL));
 
@@ -173,7 +173,7 @@ int main()
     int NUM = 0;
     int scoreDezena = 0;
 
-    SDL_RenderCopy(renderizador, CarregaTextura("imagens/play.bmp", renderizador), NULL, NULL);
+    SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/play.bmp", renderizador), NULL, NULL);
     // Cola coisas na janela
     SDL_RenderPresent(renderizador);
     SDL_Delay(1000 / 60); // 60 fps
