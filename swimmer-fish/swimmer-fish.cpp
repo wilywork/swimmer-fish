@@ -235,7 +235,10 @@ int main()
         destinoLinha.y = 0;
         
         linhaMov++;
-        
+        if (destinoLinha.x <= -100) {
+            linhaMov = 0;
+        }
+
         if (TAMlinhaH == 200) {
             valorDeCorrecao = -1;
         } else if (TAMlinhaH == 10) {
