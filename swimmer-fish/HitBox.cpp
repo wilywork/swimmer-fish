@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string.h>
 #include <SDL.h>
 #include <time.h>
 

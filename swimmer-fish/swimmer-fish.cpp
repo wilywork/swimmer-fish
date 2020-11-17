@@ -6,13 +6,16 @@
 #include <SDL.h>
 #include <time.h>
 #include "HitBox.h"
+#include "Eventos.h"
+#include "Menu.h"
+#include "CarregaTextura.h"
 
 
 using namespace std;
 
 // ============ FUNCOES ============
 
-SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
+/*SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
 {
     SDL_Surface* surface = SDL_LoadBMP(imagem); // Pega uma imagem/arquivo para a surface
     if (!surface) {
@@ -24,10 +27,25 @@ SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
     SDL_FreeSurface(surface); // Limpa a surface
 
     return textura;
-};
+};*/
+
+/*void CarregaImagens(SDL_Renderer* renderizador) {
+    SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
+    SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
+    SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
+    SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
+    SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
+    SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
+    SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
+    SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
+    SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
+    SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
+    SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
+    SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.1.bmp", renderizador);
+};*/
 
 
-void FuncEventos(bool &gameOver,int &peixeMov, int &pressUpPeixe) {
+/*void FuncEventos(bool &gameOver,int &peixeMov, int &pressUpPeixe) {
     SDL_Event evento;
     while (SDL_PollEvent(&evento)) {
         switch (evento.type) {
@@ -39,9 +57,10 @@ void FuncEventos(bool &gameOver,int &peixeMov, int &pressUpPeixe) {
             switch (evento.key.keysym.sym) {
             case SDLK_UP:
             case SDLK_w:
-                if (peixeMov >= 0) {
+                if (peixeMov >= -10) {
                     pressUpPeixe = true;
                     peixeMov -= 1;
+                    cout << peixeMov << endl;
                 }
                 break;
             }
@@ -51,7 +70,22 @@ void FuncEventos(bool &gameOver,int &peixeMov, int &pressUpPeixe) {
             break;
         }
     }
-};
+};*/
+
+/*void Menu(bool & menuAtivo) {
+    while (menuAtivo) {
+        SDL_Event evento;
+
+        SDL_PollEvent(&evento);
+
+        if (evento.type == SDL_KEYDOWN) {
+            if (evento.key.keysym.sym == SDLK_KP_ENTER || evento.key.keysym.sym == SDLK_RETURN) {
+                menuAtivo = false;
+            }
+        }
+    }
+}*/
+
 
 // ============ FIM FUNCOES ============
 int main()
@@ -71,6 +105,8 @@ int main()
     SDL_Renderer* renderizador = SDL_CreateRenderer(janela, -1, SDL_RENDERER_ACCELERATED);
 
     // Imagens renderizadas
+
+/*CarregaImagens(renderizador);*/
 
     SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
     SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
@@ -108,22 +144,12 @@ int main()
     int MOVfundo4 = 0;
 
     SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/parallax/menu.bmp", renderizador), NULL, NULL);
+
     // Cola coisas na janela
     SDL_RenderPresent(renderizador);
     SDL_Delay(1000 / 60); // 60 fps
 
-    while (menuAtivo) {
-        SDL_Event evento;
-
-        SDL_PollEvent(&evento);
-
-        if (evento.type == SDL_KEYDOWN) {
-            if (evento.key.keysym.sym == SDLK_KP_ENTER || evento.key.keysym.sym == SDLK_RETURN) {
-                menuAtivo = false;
-            }
-        }
-    }
-
+    Menu(menuAtivo);
 
     while (!gameOver) {
 
@@ -206,6 +232,9 @@ int main()
             } else {
                 peixeMov--;
             }
+        }
+        if (peixeMov <= -20) {
+            pressUpPeixe = false;
         }
 
         SDL_RenderCopy(renderizador, peixe, NULL, &destinoPeixe);
