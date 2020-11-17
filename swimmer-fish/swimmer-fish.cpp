@@ -98,6 +98,9 @@ int main()
     int TAMcoral = 30;
     int NUM = 0;
     int scoreDezena = 0;
+    int MOVfundo2 = 0;
+    int MOVfundo3 = 0;
+    int MOVfundo4 = 0;
 
     SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/parallax/menu.bmp", renderizador), NULL, NULL);
     // Cola coisas na janela
@@ -116,9 +119,6 @@ int main()
         }
     }
 
-    int MOVfundo2 = 0;
-    int MOVfundo3 = 0;
-    int MOVfundo4 = 0;
 
     while (!gameOver) {
 

@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="swimmer-fish.cpp" />
   </ItemGroup>
   <ItemGroup>
