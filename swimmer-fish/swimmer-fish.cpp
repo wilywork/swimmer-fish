@@ -98,7 +98,7 @@ int main()
     int NUM = 0;
     int scoreDezena = 0;
 
-    SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/play.bmp", renderizador), NULL, NULL);
+    SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/parallax/menu.bmp", renderizador), NULL, NULL);
     // Cola coisas na janela
     SDL_RenderPresent(renderizador);
     SDL_Delay(1000 / 60); // 60 fps
