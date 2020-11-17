@@ -27,7 +27,7 @@ SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
 };
 
 
-void FuncEventos(bool &gameOver,int &peixeMov ) {
+void FuncEventos(bool &gameOver,int &peixeMov, int &pressUpPeixe) {
     SDL_Event evento;
     while (SDL_PollEvent(&evento)) {
         switch (evento.type) {
@@ -40,10 +40,14 @@ void FuncEventos(bool &gameOver,int &peixeMov ) {
             case SDLK_UP:
             case SDLK_w:
                 if (peixeMov >= 0) {
-                    peixeMov -= 20;
+                    pressUpPeixe = true;
+                    peixeMov -= 10;
                 }
                 break;
             }
+            break;
+        default:
+            pressUpPeixe = false;
             break;
         }
     }
@@ -86,6 +90,7 @@ int main()
     // Variavel para manter o jogo aberto
     bool gameOver = false;
 
+    int pressUpPeixe = false;
     int peixeMov = 0;
     int coralMov = 0;
     int TAMpeixe = 100;
@@ -122,7 +127,7 @@ int main()
 
     while (!gameOver) {
 
-        FuncEventos(gameOver, peixeMov);
+        FuncEventos(gameOver, peixeMov, pressUpPeixe);
 
         SDL_RenderClear(renderizador); // Limpa a janela
 
@@ -196,7 +201,10 @@ int main()
         }
         else
         {
+            if (!pressUpPeixe) {
             peixeMov++;
+
+            }
         }
 
         SDL_RenderCopy(renderizador, peixe, NULL, &destinoPeixe);
