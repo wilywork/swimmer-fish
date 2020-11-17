@@ -239,7 +239,7 @@ int main()
             linhaMov = 0;
         }
 
-        if (TAMlinhaH == 200) {
+        if (TAMlinhaH == 200 || TAMlinhaH >= (destinoCoral.h + destinoPeixe.h - 100)) {
             valorDeCorrecao = -1;
         } else if (TAMlinhaH == 10) {
             valorDeCorrecao = 1;
