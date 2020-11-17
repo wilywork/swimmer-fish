@@ -5,8 +5,6 @@
 #include <string.h>
 #include <SDL.h>
 #include <time.h>
-#include "HitBox.h"
-
 
 using namespace std;
 
@@ -26,6 +24,86 @@ SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
     return textura;
 };
 
+int RandTamCoral() {
+        int TAMcoral = rand() % 100;
+        while (TAMcoral < 30) {
+            TAMcoral = rand() % 100;
+            return TAMcoral;
+        }
+};
+
+void HitBoxCoral(SDL_Rect destinoCoral, SDL_Rect destinoPeixe, int &peixeMov, int &score, int &TAMpeixe, int& comidaRandX,int &coralMov, int& linhaMOV, int& comidaMov, int &TAMcoral) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoCoral.y + 10) {
+        if (destinoPeixe.x + destinoPeixe.w > destinoCoral.x + 5) {
+            if (destinoPeixe.x < destinoCoral.x + destinoCoral.w) {
+                peixeMov = 0;
+                score = 0;
+                TAMpeixe = 100;
+                comidaRandX = rand() % 550;
+                coralMov = 0;
+                linhaMOV = 0;
+                comidaMov = 0;
+                TAMcoral = RandTamCoral();
+            }
+        }
+    }
+};
+
+void HitBoxComida(SDL_Rect destinoComida, SDL_Rect destinoPeixe, int &TAMpeixe, int &comidaMov, int &score, int &comidaRandY, int &comidaMOV) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoComida.y) {
+        if (destinoPeixe.y < destinoComida.y + destinoComida.h) {
+            if (destinoPeixe.x + destinoPeixe.w > destinoComida.x) {
+                if (destinoPeixe.x < destinoComida.x + destinoComida.w) {
+                    TAMpeixe += 5;
+                    comidaMov = 0;
+                    score++;
+                    cout << "Score:" << score << endl;
+                    comidaRandY =  rand() % 550;
+                    comidaMOV = 0;
+
+                }
+            }
+        }
+    }
+};
+
+void HitBoxLinha(SDL_Rect destinoLinha, SDL_Rect destinoPeixe, int& peixeMov, int& score, int& TAMpeixe, int& comidaRandX, int& coralMov, int& linhaMOV, int& comidaMov, int& TAMcoral) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoLinha.y) {
+        if (destinoPeixe.y < destinoLinha.y + destinoLinha.h) {
+            if (destinoPeixe.x + destinoPeixe.w > destinoLinha.x) {
+                if (destinoPeixe.x < destinoLinha.x + destinoLinha.w) {
+                    peixeMov = 0;
+                    score = 0;
+                    TAMpeixe = 100;
+                    comidaRandX = rand() % 550;
+                    coralMov = 0;
+                    linhaMOV = 0;
+                    comidaMov = 0;
+                    TAMcoral = RandTamCoral();
+                }
+            }
+        }
+    }
+};
+
+void HitBoxAnzol(SDL_Rect destinoAnzol, SDL_Rect destinoPeixe, int& peixeMov, int& score, int& TAMpeixe, int& comidaRandY, int& coralMov, int& linhaMOV, int& comidaMov, int& TAMcoral) {
+    if (destinoPeixe.y + destinoPeixe.h > destinoAnzol.y) {
+        if (destinoPeixe.y < destinoAnzol.y + destinoAnzol.h) {
+            if (destinoPeixe.x + destinoPeixe.w > destinoAnzol.x) {
+                if (destinoPeixe.x < destinoAnzol.x + destinoAnzol.w) {
+                    peixeMov = 0;
+                    score = 0;
+                    TAMpeixe = 100;
+                    comidaRandY = rand() % 550;
+                    coralMov = 0;
+                    linhaMOV = 0;
+                    comidaMov = 0;
+                    TAMcoral = RandTamCoral();
+                }
+            }
+        }
+    }
+};
 
 void FuncEventos(bool &gameOver,int &peixeMov ) {
     SDL_Event evento;
@@ -67,19 +145,14 @@ int main()
     SDL_Renderer* renderizador = SDL_CreateRenderer(janela, -1, SDL_RENDERER_ACCELERATED);
 
     // Imagens renderizadas
-
-    SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
-    SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
-    SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
-    SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
-    SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
-    SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
-    SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
-    SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
-    SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
-    SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
-    SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
-    SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.bmp", renderizador);
+    SDL_Texture* fundo = CarregaTextura("imagens/fundoJogo.bmp", renderizador);
+    SDL_Texture* peixe = CarregaTextura("imagens/peixe.bmp", renderizador);
+    SDL_Texture* coral = CarregaTextura("imagens/coral.bmp", renderizador);
+    SDL_Texture* comida = CarregaTextura("imagens/comida.bmp", renderizador);
+    SDL_Texture* linha = CarregaTextura("imagens/linha.bmp", renderizador);
+    SDL_Texture* anzol = CarregaTextura("imagens/anzol.bmp", renderizador);
+    SDL_Texture* numeros = CarregaTextura("imagens/numeros2.bmp", renderizador);
+    SDL_Texture* scoreIMG = CarregaTextura("imagens/score.bmp", renderizador);
 
     srand(time(NULL));
 
@@ -98,7 +171,7 @@ int main()
     int NUM = 0;
     int scoreDezena = 0;
 
-    SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/play.bmp", renderizador), NULL, NULL);
+    SDL_RenderCopy(renderizador, CarregaTextura("Imagens/parallax/menu.bmp", renderizador), NULL, NULL);
     // Cola coisas na janela
     SDL_RenderPresent(renderizador);
     SDL_Delay(1000 / 60); // 60 fps
@@ -115,42 +188,13 @@ int main()
         }
     }
 
-    int MOVfundo2 = 0;
-
     while (!gameOver) {
 
         FuncEventos(gameOver, peixeMov);
 
         SDL_RenderClear(renderizador); // Limpa a janela
 
-        SDL_RenderCopy(renderizador, fundo1, NULL, NULL);
-
-        if (MOVfundo2 <= -800) {
-            MOVfundo2 = 0;
-        }
-        //Fundo 2
-        SDL_Rect destinoFundo2;
-        destinoFundo2.w = 800;
-        destinoFundo2.h = 353;
-        destinoFundo2.x = 0 + MOVfundo2;
-        destinoFundo2.y = 0;
-        MOVfundo2 -= 2;
-        SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundo2);
-        //Fundo 2
-        SDL_Rect destinoFundoEspelho;
-        destinoFundoEspelho.w = 800;
-        destinoFundoEspelho.h = 353;
-        destinoFundoEspelho.x = 800 + MOVfundo2;
-        destinoFundoEspelho.y = 0;
-        SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundoEspelho);
-
-
-
-
-
-        SDL_RenderCopy(renderizador, fundo3, NULL, NULL);
-        SDL_RenderCopy(renderizador, fundo4, NULL, NULL);
-
+        SDL_RenderCopy(renderizador, fundo, NULL, NULL);
 
         //Peixe
         SDL_Rect destinoPeixe;
