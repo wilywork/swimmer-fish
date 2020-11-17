@@ -67,29 +67,19 @@ int main()
     SDL_Renderer* renderizador = SDL_CreateRenderer(janela, -1, SDL_RENDERER_ACCELERATED);
 
     // Imagens renderizadas
-<<<<<<< HEAD
-    SDL_Texture* fundo = CarregaTextura("imagens/fundoJogo.bmp", renderizador);
-    SDL_Texture* peixe = CarregaTextura("imagens/peixe.bmp", renderizador);
-    SDL_Texture* coral = CarregaTextura("imagens/coral.bmp", renderizador);
-    SDL_Texture* comida = CarregaTextura("imagens/comida.bmp", renderizador);
-    SDL_Texture* linha = CarregaTextura("imagens/linha.bmp", renderizador);
-    SDL_Texture* anzol = CarregaTextura("imagens/anzol.bmp", renderizador);
-    SDL_Texture* numeros = CarregaTextura("imagens/numeros2.bmp", renderizador);
-    SDL_Texture* scoreIMG = CarregaTextura("imagens/score.bmp", renderizador);
-    SDL_Texture* fundo1 = CarregaTextura("imagens/parallax/fundo1.bmp", renderizador);
-    SDL_Texture* fundo2 = CarregaTextura("imagens/parallax/fundo2.bmp", renderizador);
-    SDL_Texture* fundo3 = CarregaTextura("imagens/parallax/fundo3.bmp", renderizador);
-    SDL_Texture* fundo4 = CarregaTextura("imagens/parallax/fundo4.bmp", renderizador);
-=======
+
     SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
     SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
     SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
     SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
     SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
     SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
-    SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
+    SDL_Texture* numeros = CarregaTextura("assets/magens/numeros2.bmp", renderizador);
     SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
->>>>>>> 82dfaed015203cb2bba450852f10a8fe9e0f64ca
+    SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
+    SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
+    SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
+    SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.bmp", renderizador);
 
     srand(time(NULL));
 
