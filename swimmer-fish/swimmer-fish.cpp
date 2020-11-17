@@ -91,6 +91,7 @@ int main()
     int TAMpeixe = 100;
     int comidaMov = 0;
     int score = 0;
+    int valorDeCorrecao = 1;
     int linhaMov = 0;
     int TAMlinhaH = 0;
     int comidaRandY = 250;
@@ -229,24 +230,27 @@ int main()
         //linha
         SDL_Rect destinoLinha;
         destinoLinha.w = 3;
-        destinoLinha.h = 10 + (TAMlinhaH * 4);
-        destinoLinha.x = 850 - (linhaMov * 3);
+        destinoLinha.h = 10 + TAMlinhaH;// (TAMlinhaH * 4);
+        destinoLinha.x = 850 - linhaMov;// (linhaMov * 3);
         destinoLinha.y = 0;
+        
         linhaMov++;
-        if (destinoLinha.x <= -100) {
-            linhaMov = 0;
+        
+        if (TAMlinhaH == 200) {
+            valorDeCorrecao = -1;
+        } else if (TAMlinhaH == 10) {
+            valorDeCorrecao = 1;
         }
-        TAMlinhaH++;
-        if (destinoLinha.h >= 550 - (destinoCoral.h + destinoPeixe.h + 75) ) {
-            TAMlinhaH = 0;
-        }
+
+        TAMlinhaH += valorDeCorrecao;
+
         SDL_RenderCopy(renderizador, linha, NULL, &destinoLinha);
 
         //Azol
         SDL_Rect destinoAnzol;
         destinoAnzol.w = 25;
         destinoAnzol.h = 25;
-        destinoAnzol.x = destinoLinha.x -13;
+        destinoAnzol.x = destinoLinha.x - 13;
         destinoAnzol.y = destinoLinha.h;
         SDL_RenderCopy(renderizador, anzol, NULL, &destinoAnzol);
 
