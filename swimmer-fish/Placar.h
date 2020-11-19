@@ -13,6 +13,8 @@ typedef struct {
 
 Placar SpawnPlacar(SDL_Renderer* renderizador, const char* textura);
 
+void UpdatePlacar(SDL_Renderer* renderizador, Placar placar);
+
 typedef struct {
 	int tamanhoW;
 	int tamanhoH;
@@ -26,5 +28,7 @@ typedef struct {
 } Numeros;
 
 Numeros SpawnNumeros(SDL_Renderer* renderizador, const char* textura, int score, int NUM);
+
+void UpdateNumeros(SDL_Renderer* renderizador, Numeros numeros);
 
 #endif 

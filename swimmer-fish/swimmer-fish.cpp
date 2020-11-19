@@ -36,8 +36,6 @@ int main()
 
     // Imagens renderizadas
 
-    SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
-    SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
     SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
     SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
     SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
@@ -73,6 +71,8 @@ int main()
     Menu(menuAtivo);
 
     Peixe peixe = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", TAMpeixe, peixeMov);
+    Placar placar = SpawnPlacar(renderizador, "assets/imagens/score.bmp");
+    Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
 
     while (!gameOver) {
 
@@ -155,7 +155,7 @@ int main()
         if (score % 10 >= 5) {
             NUM = 1;
         }
-        Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
+        UpdateNumeros(renderizador, numeros);
 
         if (score >= 10) {
             scoreDezena = score / 10;
@@ -166,11 +166,11 @@ int main()
             if (scoreDezena >= 5) {
                 NUM = 1;
             }
-            Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
+            UpdateNumeros(renderizador, numeros);
         }
 
         // Placa de score
-        Placar placar = SpawnPlacar(renderizador, "assets/imagens/score.bmp");
+        UpdatePlacar(renderizador, placar);
 
         //HitBox
         HitBoxComida(comida.estrutura, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);

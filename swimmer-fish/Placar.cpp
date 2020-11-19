@@ -17,6 +17,7 @@ Placar SpawnPlacar(SDL_Renderer* renderizador, const char* textura) {
     placar.tamanhoH = destinoPlacar.h;
     placar.posicaoX = destinoPlacar.x;
     placar.posicaoY = destinoPlacar.y;
+    placar.texturaCarregada = CarregaTextura(textura, renderizador);
 
     placar.estrutura = destinoPlacar;
 
@@ -27,6 +28,10 @@ Placar SpawnPlacar(SDL_Renderer* renderizador, const char* textura) {
     return placar;
 
 };
+
+void UpdatePlacar(SDL_Renderer* renderizador, Placar placar) {
+    SDL_RenderCopy(renderizador, placar.texturaCarregada, NULL, &placar.estrutura);
+}
 
 Numeros SpawnNumeros(SDL_Renderer* renderizador, const char* textura, int score, int NUM) {
 
@@ -46,16 +51,21 @@ Numeros SpawnNumeros(SDL_Renderer* renderizador, const char* textura, int score,
     numeros.tamanhoH = destinoNumeros.h;
     numeros.posicaoX = destinoNumeros.x;
     numeros.posicaoY = destinoNumeros.y;
+    numeros.texturaCarregada = CarregaTextura(textura, renderizador);
 
 
 
     numeros.estrutura = destinoNumeros;
+    numeros.origem = origemNumeros;
 
     numeros.texturaCarregada = CarregaTextura(textura, renderizador);
 
-    SDL_RenderCopy(renderizador, numeros.texturaCarregada, &origemNumeros, &destinoNumeros);
+    SDL_RenderCopy(renderizador, numeros.texturaCarregada, &numeros.origem, &numeros.estrutura);
 
     return numeros;
 
 };
 
+void UpdateNumeros(SDL_Renderer* renderizador, Numeros numeros) {
+    SDL_RenderCopy(renderizador, numeros.texturaCarregada, &numeros.origem, &numeros.estrutura);
+}
