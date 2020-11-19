@@ -143,7 +143,7 @@ int main()
     int NUM = 0;
     int scoreDezena = 0;
     int MOVfundo2 = 0;
-    int MOVfundo3 = 0;
+    int MOVfundo3 = 0; // fazer vetor
     int MOVfundo4 = 0;
 
     SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/parallax/menu.bmp", renderizador), NULL, NULL);
