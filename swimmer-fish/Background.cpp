@@ -13,31 +13,46 @@ const char* ImagensBackground[quantidadeDeFundos] = {
     "assets/imagens/parallax/fundo4.1.bmp"
 };
 
-SDL_Texture* texturaCarregada[quantidadeDeFundos];
+SDL_Texture* texturaCarregadaFundo[quantidadeDeFundos];
 
-void SpawnBackground(SDL_Renderer* renderizador, int movimento) {
+SDL_Rect estruturaFundo1[quantidadeDeFundos];
+SDL_Rect estruturaFundo2[quantidadeDeFundos];
 
+void SpawnBackground(SDL_Renderer* renderizador) {
+    
     for (int i = 0; i < quantidadeDeFundos; i++)
     {
-        if (!texturaCarregada[i]) {
-            texturaCarregada[i] = CarregaTextura(ImagensBackground[i], renderizador);
+        if (!texturaCarregadaFundo[i]) {
+            texturaCarregadaFundo[i] = CarregaTextura(ImagensBackground[i], renderizador);
         }
 
-        SDL_Rect fundo;
-        fundo.w = 800;
-        fundo.h = 353;
-        fundo.x = 0 + movimento + i;
-        fundo.y = 100;
-        
-        SDL_RenderCopy(renderizador, texturaCarregada[i], NULL, &fundo);
+      
+        estruturaFundo1[i].w = 800;
+        estruturaFundo1[i].h = 600;
+        estruturaFundo1[i].x = 0;
+        estruturaFundo1[i].y = 0;
+        SDL_RenderCopy(renderizador, texturaCarregadaFundo[i], NULL, &estruturaFundo1[i]);
 
-        SDL_Rect fundoDuplicado;
-        fundoDuplicado.w = 800;
-        fundoDuplicado.h = 353;
-        fundoDuplicado.x = 0 + movimento + i;
-        fundoDuplicado.y = 100;
-        SDL_RenderCopy(renderizador, texturaCarregada[i], NULL, &fundoDuplicado);
-
+        estruturaFundo2[i].w = 800;
+        estruturaFundo2[i].h = 600;
+        estruturaFundo2[i].x = 800;
+        estruturaFundo2[i].y = 0;
+        SDL_RenderCopy(renderizador, texturaCarregadaFundo[i], NULL, &estruturaFundo2[i]);
     }
+}
 
+void UpdateBackground(SDL_Renderer* renderizador, int movimento) {
+    for (int i = 0; i < quantidadeDeFundos; i++)
+    {
+        if (estruturaFundo1[i].x <= -800) {
+            estruturaFundo1[i].x = 0;
+        }
+        if (estruturaFundo2[i].x <= 0) {
+            estruturaFundo2[i].x = 800;
+        }
+        estruturaFundo1[i].x = estruturaFundo1[i].x + movimento;
+        estruturaFundo2[i].x = estruturaFundo2[i].x + movimento;
+        SDL_RenderCopy(renderizador, texturaCarregadaFundo[i], NULL, &estruturaFundo1[i]);
+        SDL_RenderCopy(renderizador, texturaCarregadaFundo[i], NULL, &estruturaFundo2[i]);
+    }
 }

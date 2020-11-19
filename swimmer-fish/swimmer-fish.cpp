@@ -74,24 +74,18 @@ int main()
     Placar placar = SpawnPlacar(renderizador, "assets/imagens/score.bmp");
     Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
 
+    SpawnBackground(renderizador);
+
     while (!gameOver) {
+        // Limpa a janela
+        SDL_RenderClear(renderizador);
 
         FuncEventos(gameOver, peixeMov, pressUpPeixe);
 
-        SDL_RenderClear(renderizador); // Limpa a janela
-
-        SDL_RenderCopy(renderizador, fundo1, NULL, NULL);
-
-        //Fundo 2
-        if (MOVfundo[0] <= -800) {
-            MOVfundo[0] = 0;
-        }
-
-       SpawnBackground(renderizador, MOVfundo[0]);
-
-       peixe.estrutura.y = peixeMov * 4;
-
-       UpdatePeixe(renderizador, peixe);
+        UpdateBackground(renderizador, -2);
+       
+        peixe.estrutura.y = peixeMov * 4;
+        UpdatePeixe(renderizador, peixe);
 
         if (peixe.estrutura.y >= 520) {
             peixe.estrutura.y = 520;
