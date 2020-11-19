@@ -5,14 +5,13 @@
 #include "Peixe.h"
 #include "CarregaTextura.h"
 
-SDL_Texture* texturaCarregada;
-
 Peixe SpawnPeixe(SDL_Renderer* renderizador, const char* textura, int tamanho, int altura) {
 
     Peixe peixe;
     peixe.tamanho = tamanho;
     peixe.textura = textura;
     peixe.altura = altura;
+    peixe.texturaCarregada = CarregaTextura(textura, renderizador);
 
     SDL_Rect destinoPeixe;
     destinoPeixe.w = tamanho;
@@ -22,16 +21,12 @@ Peixe SpawnPeixe(SDL_Renderer* renderizador, const char* textura, int tamanho, i
 
     peixe.estrutura = destinoPeixe;
 
-    if (!texturaCarregada) {
-        texturaCarregada = CarregaTextura(textura, renderizador);
-    }
-
-    SDL_RenderCopy(renderizador, texturaCarregada, NULL, &peixe.estrutura);
+    SDL_RenderCopy(renderizador, peixe.texturaCarregada, NULL, &peixe.estrutura);
 
     return peixe;
 
 }
 
 void UpdatePeixe(SDL_Renderer* renderizador, Peixe peixe) {
-    SDL_RenderCopy(renderizador, texturaCarregada, NULL, &peixe.estrutura);
+    SDL_RenderCopy(renderizador, peixe.texturaCarregada, NULL, &peixe.estrutura);
 }
