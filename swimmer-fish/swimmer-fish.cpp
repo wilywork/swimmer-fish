@@ -11,6 +11,7 @@
 #include "CarregaTextura.h"
 #include "Peixe.h"
 #include "Objetos.h"
+#include "Background.h"
 
 
 using namespace std;
@@ -123,6 +124,7 @@ int main()
     SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
     SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.1.bmp", renderizador);
 
+
     srand(time(NULL));
 
     // Variavel para manter o jogo aberto
@@ -165,12 +167,15 @@ int main()
         if (MOVfundo2 <= -800) {
             MOVfundo2 = 0;
         }
+        MOVfundo2 -= 2;
+
+       // SpawnBackground(renderizador, [""]);
+
         SDL_Rect destinoFundo2;
         destinoFundo2.w = 800;
         destinoFundo2.h = 353;
         destinoFundo2.x = 0 + MOVfundo2;
         destinoFundo2.y = 100;
-        MOVfundo2 -= 2;
         SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundo2);
         SDL_Rect destinoFundoEspelho;
         destinoFundoEspelho.w = 800;
