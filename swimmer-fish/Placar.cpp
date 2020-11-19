@@ -46,17 +46,14 @@ Numeros SpawnNumeros(SDL_Renderer* renderizador, const char* textura, int score,
     numeros.tamanhoH = destinoNumeros.h;
     numeros.posicaoX = destinoNumeros.x;
     numeros.posicaoY = destinoNumeros.y;
-    numeros.OtamanhoW = origemNumeros.w;
-    numeros.OtamanhoH = origemNumeros.h;
-    numeros.OposicaoX = origemNumeros.x;
-    numeros.OposicaoY = origemNumeros.y;
+
 
 
     numeros.estrutura = destinoNumeros;
 
     numeros.texturaCarregada = CarregaTextura(textura, renderizador);
 
-    SDL_RenderCopy(renderizador, numeros.texturaCarregada, NULL, &destinoNumeros);
+    SDL_RenderCopy(renderizador, numeros.texturaCarregada, &origemNumeros, &destinoNumeros);
 
     return numeros;
 

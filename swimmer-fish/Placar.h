@@ -18,10 +18,7 @@ typedef struct {
 	int tamanhoH;
 	int posicaoX;
 	int posicaoY;
-	int OtamanhoW;
-	int OtamanhoH;
-	int OposicaoX;
-	int OposicaoY;
+
 	const char* textura;
 	SDL_Rect origem;
 	SDL_Rect estrutura;
