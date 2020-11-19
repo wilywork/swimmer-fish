@@ -12,23 +12,18 @@ int RandTamCoral() {
     }
 };
 
-void reset(int& peixeMov, int& score, int& TAMpeixe, int& comidaRandX, int& coralMov, int& linhaMOV, int& comidaMov, int& TAMcoral) {
-
-    peixeMov = 0;
-    score = 0;
-    TAMpeixe = 100;
-    comidaRandX = rand() % 550;
-    coralMov = 0;
-    linhaMOV = 0;
-    comidaMov = 0;
-    TAMcoral = RandTamCoral();
-};
-
 void HitBoxCoral(SDL_Rect destinoCoral, SDL_Rect destinoPeixe, int& peixeMov, int& score, int& TAMpeixe, int& comidaRandX, int& coralMov, int& linhaMOV, int& comidaMov, int& TAMcoral) {
     if (destinoPeixe.y + destinoPeixe.h > destinoCoral.y + 10) {
         if (destinoPeixe.x + destinoPeixe.w > destinoCoral.x + 5) {
             if (destinoPeixe.x < destinoCoral.x + destinoCoral.w) {
-                reset(peixeMov, score, TAMpeixe, comidaRandX, coralMov, linhaMOV, comidaMov, TAMcoral);
+                peixeMov = 0;
+                score = 0;
+                TAMpeixe = 100;
+                comidaRandX = rand() % 550;
+                coralMov = 0;
+                linhaMOV = 0;
+                comidaMov = 0;
+                TAMcoral = RandTamCoral();
             }
         }
     }
@@ -57,19 +52,33 @@ void HitBoxLinha(SDL_Rect destinoLinha, SDL_Rect destinoPeixe, int& peixeMov, in
         if (destinoPeixe.y < destinoLinha.y + destinoLinha.h) {
             if (destinoPeixe.x + destinoPeixe.w > destinoLinha.x) {
                 if (destinoPeixe.x < destinoLinha.x + destinoLinha.w) {
-                    reset(peixeMov, score, TAMpeixe, comidaRandX, coralMov, linhaMOV, comidaMov, TAMcoral);
+                    peixeMov = 0;
+                    score = 0;
+                    TAMpeixe = 100;
+                    comidaRandX = rand() % 550;
+                    coralMov = 0;
+                    linhaMOV = 0;
+                    comidaMov = 0;
+                    TAMcoral = RandTamCoral();
                 }
             }
         }
     }
 };
 
-void HitBoxAnzol(SDL_Rect destinoAnzol, SDL_Rect destinoPeixe, int& peixeMov, int& score, int& TAMpeixe, int& comidaRandX, int& coralMov, int& linhaMOV, int& comidaMov, int& TAMcoral) {
+void HitBoxAnzol(SDL_Rect destinoAnzol, SDL_Rect destinoPeixe, int& peixeMov, int& score, int& TAMpeixe, int& comidaRandY, int& coralMov, int& linhaMOV, int& comidaMov, int& TAMcoral) {
     if (destinoPeixe.y + destinoPeixe.h > destinoAnzol.y) {
         if (destinoPeixe.y < destinoAnzol.y + destinoAnzol.h) {
             if (destinoPeixe.x + destinoPeixe.w > destinoAnzol.x) {
                 if (destinoPeixe.x < destinoAnzol.x + destinoAnzol.w) {
-                    reset(peixeMov, score, TAMpeixe, comidaRandX, coralMov, linhaMOV, comidaMov, TAMcoral);
+                    peixeMov = 0;
+                    score = 0;
+                    TAMpeixe = 100;
+                    comidaRandY = rand() % 550;
+                    coralMov = 0;
+                    linhaMOV = 0;
+                    comidaMov = 0;
+                    TAMcoral = RandTamCoral();
                 }
             }
         }

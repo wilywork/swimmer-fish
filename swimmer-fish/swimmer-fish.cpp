@@ -11,12 +11,85 @@
 #include "CarregaTextura.h"
 #include "Peixe.h"
 #include "Objetos.h"
-#include "Background.h"
 
 
 using namespace std;
 
+// ============ FUNCOES ============
 
+/*SDL_Texture* CarregaTextura(const char* imagem, SDL_Renderer* renderizador)
+{
+    SDL_Surface* surface = SDL_LoadBMP(imagem); // Pega uma imagem/arquivo para a surface
+    if (!surface) {
+        cout << "Erro ao carregar: " << imagem << endl;
+    }
+
+    SDL_Texture* textura = SDL_CreateTextureFromSurface(renderizador, surface); // Textura recebe a surface
+
+    SDL_FreeSurface(surface); // Limpa a surface
+
+    return textura;
+};*/
+
+/*void CarregaImagens(SDL_Renderer* renderizador) {
+    SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
+    SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
+    SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
+    SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
+    SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
+    SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
+    SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
+    SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
+    SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
+    SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
+    SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
+    SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.1.bmp", renderizador);
+};*/
+
+
+/*void FuncEventos(bool &gameOver,int &peixeMov, int &pressUpPeixe) {
+    SDL_Event evento;
+    while (SDL_PollEvent(&evento)) {
+        switch (evento.type) {
+        case SDL_QUIT:
+            gameOver = true;
+            break;
+
+        case SDL_KEYDOWN:
+            switch (evento.key.keysym.sym) {
+            case SDLK_UP:
+            case SDLK_w:
+                if (peixeMov >= -10) {
+                    pressUpPeixe = true;
+                    peixeMov -= 1;
+                    cout << peixeMov << endl;
+                }
+                break;
+            }
+            break;
+        default:
+            pressUpPeixe = false;
+            break;
+        }
+    }
+};*/
+
+/*void Menu(bool & menuAtivo) {
+    while (menuAtivo) {
+        SDL_Event evento;
+
+        SDL_PollEvent(&evento);
+
+        if (evento.type == SDL_KEYDOWN) {
+            if (evento.key.keysym.sym == SDLK_KP_ENTER || evento.key.keysym.sym == SDLK_RETURN) {
+                menuAtivo = false;
+            }
+        }
+    }
+}*/
+
+
+// ============ FIM FUNCOES ============
 int main()
 {
     bool jogoAtivo = true;
@@ -35,13 +108,20 @@ int main()
 
     // Imagens renderizadas
 
+/*CarregaImagens(renderizador);*/
+
+
+   // SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
+   // SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
+   // SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
+   // SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
+   // SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
     SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
     SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
     SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
     SDL_Texture* fundo2 = CarregaTextura("assets/imagens/parallax/fundo2.bmp", renderizador);
     SDL_Texture* fundo3 = CarregaTextura("assets/imagens/parallax/fundo3.bmp", renderizador);
     SDL_Texture* fundo4 = CarregaTextura("assets/imagens/parallax/fundo4.1.bmp", renderizador);
-
 
     srand(time(NULL));
 
@@ -61,7 +141,9 @@ int main()
     int TAMcoral = 30;
     int NUM = 0;
     int scoreDezena = 0;
-    int MOVfundo[3] = {};
+    int MOVfundo2 = 0;
+    int MOVfundo3 = 0; // fazer vetor
+    int MOVfundo4 = 0;
 
     SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/parallax/menu.bmp", renderizador), NULL, NULL);
 
@@ -80,64 +162,57 @@ int main()
         SDL_RenderCopy(renderizador, fundo1, NULL, NULL);
 
         //Fundo 2
-        if (MOVfundo[0] <= -800) {
-            MOVfundo[0] = 0;
+        if (MOVfundo2 <= -800) {
+            MOVfundo2 = 0;
         }
-        MOVfundo2 -= 2;
-
-       // SpawnBackground(renderizador, [""]);
-
         SDL_Rect destinoFundo2;
         destinoFundo2.w = 800;
         destinoFundo2.h = 353;
-        destinoFundo2.x = 0 + MOVfundo[0];
+        destinoFundo2.x = 0 + MOVfundo2;
         destinoFundo2.y = 100;
-<<<<<<< HEAD
-        MOVfundo[0] -= 2;
-=======
->>>>>>> 42bf1b70c9f8047d3371ea0865492e1592622377
+        MOVfundo2 -= 2;
         SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundo2);
         SDL_Rect destinoFundoEspelho;
         destinoFundoEspelho.w = 800;
         destinoFundoEspelho.h = 353;
-        destinoFundoEspelho.x = 800 + MOVfundo[0];
+        destinoFundoEspelho.x = 800 + MOVfundo2;
         destinoFundoEspelho.y = 100;
         SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundoEspelho);
-        
+
         //Fundo 3
-        if (MOVfundo[1] <= -800) {
-            MOVfundo[1] = 0;
+        if (MOVfundo3 <= -800) {
+            MOVfundo3 = 0;
         }
         SDL_Rect destinoFundo3;
         destinoFundo3.w = 800;
         destinoFundo3.h = 353;
-        destinoFundo3.x = 0 + MOVfundo[1];
+        destinoFundo3.x = 0 + MOVfundo3;
         destinoFundo3.y = 150;
-        MOVfundo[1] -= 3;
+        MOVfundo3 -= 3;
         SDL_RenderCopy(renderizador, fundo3, NULL, &destinoFundo3);
         SDL_Rect destinoFundo3Espelho;
         destinoFundo3Espelho.w = 800;
         destinoFundo3Espelho.h = 353;
-        destinoFundo3Espelho.x = 800 + MOVfundo[1];
+        destinoFundo3Espelho.x = 800 + MOVfundo3;
         destinoFundo3Espelho.y = 150;
         SDL_RenderCopy(renderizador, fundo3, NULL, &destinoFundo3Espelho);
 
 
         //Fundo 4
-        if (MOVfundo[2] <= -800) {
-            MOVfundo[2] = 0;
+        if (MOVfundo4 <= -800) {
+            MOVfundo4 = 0;
         }
         SDL_Rect destinoFundo4;
         destinoFundo4.w = 800;
         destinoFundo4.h = 400;
-        destinoFundo4.x = 0 + MOVfundo[2];
+        destinoFundo4.x = 0 + MOVfundo4;
         destinoFundo4.y = 200;
-        MOVfundo[2] -= 5;
+        MOVfundo4 -= 5;
         SDL_RenderCopy(renderizador, fundo4, NULL, &destinoFundo4);
         SDL_Rect destinoFundo4Espelho;
         destinoFundo4Espelho.w = 800;
         destinoFundo4Espelho.h = 400;
-        destinoFundo4Espelho.x = 800 + MOVfundo[2];
+        destinoFundo4Espelho.x = 800 + MOVfundo4;
         destinoFundo4Espelho.y = 200;
         SDL_RenderCopy(renderizador, fundo4, NULL, &destinoFundo4Espelho);
 
