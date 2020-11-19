@@ -215,35 +215,10 @@ int main()
         destinoFundo4Espelho.y = 200;
         SDL_RenderCopy(renderizador, fundo4, NULL, &destinoFundo4Espelho);
 
+        Peixe peixe = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", TAMpeixe, peixeMov * 4);
 
-
-        //Peixe
-       /* SDL_Rect destinoPeixe;
-        destinoPeixe.w = TAMpeixe;
-        destinoPeixe.h = TAMpeixe;
-        destinoPeixe.x = 50;
-        destinoPeixe.y =  peixeMov * 4;
-        if (destinoPeixe.y >= 520) {
-            destinoPeixe.y = 520;
-        }
-        else
-        {
-            if (!pressUpPeixe) {
-                peixeMov++;
-            } else {
-                peixeMov--;
-            }
-        }
-        if (peixeMov <= -20) {
-            pressUpPeixe = false;
-        }
-
-        SDL_RenderCopy(renderizador, peixe, NULL, &destinoPeixe);*/
-
-        Peixe jogador = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", TAMpeixe, peixeMov * 4);
-
-        if (jogador.estrutura.y >= 520) {
-            jogador.estrutura.y = 520;
+        if (peixe.estrutura.y >= 520) {
+            peixe.estrutura.y = 520;
         } else {
             if (!pressUpPeixe) {
                 peixeMov++;
@@ -295,7 +270,7 @@ int main()
             linhaMov = 0;
         }
 
-        if (TAMlinhaH == 200 || TAMlinhaH >= (destinoCoral.h + jogador.estrutura.h - 100)) {
+        if (TAMlinhaH == 200 || TAMlinhaH >= (destinoCoral.h + peixe.estrutura.h - 100)) {
             valorDeCorrecao = -1;
         } else if (TAMlinhaH == 10) {
             valorDeCorrecao = 1;
@@ -364,10 +339,10 @@ int main()
         SDL_RenderCopy(renderizador, scoreIMG, NULL, &destinoScore);
 
         //HitBox
-        HitBoxComida(destinoComida, jogador.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
-        HitBoxCoral(destinoCoral, jogador.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxLinha(destinoLinha, jogador.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxAnzol(destinoAnzol, jogador.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxComida(destinoComida, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
+        HitBoxCoral(destinoCoral, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxLinha(destinoLinha, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxAnzol(destinoAnzol, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
 
         SDL_RenderPresent(renderizador); // Cola coisas na janela
         SDL_Delay(1000 / 60); // 60 fps
