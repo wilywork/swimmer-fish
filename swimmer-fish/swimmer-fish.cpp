@@ -12,6 +12,7 @@
 #include "Peixe.h"
 #include "Objetos.h"
 #include "Background.h"
+#include "Placar.h"
 
 
 using namespace std;
@@ -202,17 +203,7 @@ int main()
         if (score % 10 >= 5) {
             NUM = 1;
         }
-        SDL_Rect origemNumeros;
-        origemNumeros.x = 62 * (score % 5);
-        origemNumeros.y = 79 * NUM;
-        origemNumeros.w = 62;
-        origemNumeros.h = 79;
-        SDL_Rect destinoNumeros;
-        destinoNumeros.w = 33;
-        destinoNumeros.h = 33;
-        destinoNumeros.x = 750;
-        destinoNumeros.y = 20;
-        SDL_RenderCopy(renderizador, numeros, &origemNumeros, &destinoNumeros);
+        Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
 
         if (score >= 10) {
             scoreDezena = score / 10;
@@ -223,26 +214,11 @@ int main()
             if (scoreDezena >= 5) {
                 NUM = 1;
             }
-            SDL_Rect origemNumeros;
-            origemNumeros.x = 62 * scoreDezena;
-            origemNumeros.y = 79 * NUM;
-            origemNumeros.w = 62;
-            origemNumeros.h = 79;
-            SDL_Rect destinoNumeros;
-            destinoNumeros.w = 33;
-            destinoNumeros.h = 33;
-            destinoNumeros.x = 715;
-            destinoNumeros.y = 20;
-            SDL_RenderCopy(renderizador, numeros, &origemNumeros, &destinoNumeros);
+            Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
         }
 
         // Placa de score
-        SDL_Rect destinoScore;
-        destinoScore.w = 87;
-        destinoScore.h = 34;
-        destinoScore.x = 623;
-        destinoScore.y = 20;
-        SDL_RenderCopy(renderizador, scoreIMG, NULL, &destinoScore);
+        Placar placar = SpawnPlacar(renderizador, "assets/imagens/score.bmp");
 
         //HitBox
         HitBoxComida(comida.estrutura, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
