@@ -10,7 +10,7 @@
 #include "Menu.h"
 #include "CarregaTextura.h"
 #include "Peixe.h"
-#include "Coral.h"
+#include "Objetos.h"
 
 
 using namespace std;
@@ -111,11 +111,10 @@ int main()
 /*CarregaImagens(renderizador);*/
 
 
-    SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
    // SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
    // SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
-    SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
-    SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
+   // SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
+   // SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
     SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
     SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
     SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
@@ -244,27 +243,20 @@ int main()
         }
 
         //comida
-        SDL_Rect destinoComida;
-        destinoComida.w = 10;
-        destinoComida.h = 10;
-        destinoComida.x = 750 - (comidaMov * 8);
-        destinoComida.y = comidaRandY;
+        Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp", comidaMov, comidaRandY);
+
         comidaMov++;
-        if (destinoComida.x <= -100) {
+        if (comida.posicaoX <= -100) {
             comidaMov = 0;
             comidaRandY = rand() % 550;
         }
-        SDL_RenderCopy(renderizador, comida, NULL, &destinoComida);
+
 
         //linha
-        SDL_Rect destinoLinha;
-        destinoLinha.w = 3;
-        destinoLinha.h = 10 + TAMlinhaH;// (TAMlinhaH * 4);
-        destinoLinha.x = 850 - linhaMov;// (linhaMov * 3);
-        destinoLinha.y = 0;
+        Linha linha = SpawnLinha(renderizador, "assets/imagens/linha.bmp", TAMlinhaH, linhaMov);
         
         linhaMov++;
-        if (destinoLinha.x <= -100) {
+        if (linha.posicaoX <= -100) {
             linhaMov = 0;
         }
 
@@ -276,15 +268,14 @@ int main()
 
         TAMlinhaH += valorDeCorrecao;
 
-        SDL_RenderCopy(renderizador, linha, NULL, &destinoLinha);
 
         //Azol
         SDL_Rect destinoAnzol;
         destinoAnzol.w = 25;
         destinoAnzol.h = 25;
-        destinoAnzol.x = destinoLinha.x - 13;
-        destinoAnzol.y = destinoLinha.h;
-        SDL_RenderCopy(renderizador, anzol, NULL, &destinoAnzol);
+        destinoAnzol.x = linha.posicaoX - 13;
+        destinoAnzol.y = linha.tamanhoH;
+        Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
 
         //Numeros do score
         if (score % 10 <= 4) {
@@ -337,9 +328,9 @@ int main()
         SDL_RenderCopy(renderizador, scoreIMG, NULL, &destinoScore);
 
         //HitBox
-        HitBoxComida(destinoComida, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
+        HitBoxComida(comida.estrutura, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
         HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxLinha(destinoLinha, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
         HitBoxAnzol(destinoAnzol, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
 
         SDL_RenderPresent(renderizador); // Cola coisas na janela
