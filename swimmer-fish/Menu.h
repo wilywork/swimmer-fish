@@ -3,4 +3,4 @@
 
 void Menu(bool& menuAtivo);
 
-#endif // JOGO_H
+#endif // MENU_H

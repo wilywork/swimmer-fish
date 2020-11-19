@@ -143,6 +143,7 @@
     <ClCompile Include="Eventos.cpp" />
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Peixe.cpp" />
     <ClCompile Include="swimmer-fish.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="Eventos.h" />
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Peixe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
