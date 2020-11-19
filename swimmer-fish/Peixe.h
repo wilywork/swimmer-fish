@@ -7,7 +7,6 @@ typedef struct {
 	int altura;
 	const char* textura;
 	SDL_Rect estrutura;
-	SDL_Texture* texturaCarregada;
 } Peixe;
 
 Peixe SpawnPeixe(SDL_Renderer* renderizador, const char* textura, int tamanho, int altura);
