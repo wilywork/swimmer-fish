@@ -83,7 +83,6 @@ int main()
         if (MOVfundo[0] <= -800) {
             MOVfundo[0] = 0;
         }
-        MOVfundo2 -= 2;
 
        // SpawnBackground(renderizador, [""]);
 
@@ -92,10 +91,8 @@ int main()
         destinoFundo2.h = 353;
         destinoFundo2.x = 0 + MOVfundo[0];
         destinoFundo2.y = 100;
-<<<<<<< HEAD
         MOVfundo[0] -= 2;
-=======
->>>>>>> 42bf1b70c9f8047d3371ea0865492e1592622377
+
         SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundo2);
         SDL_Rect destinoFundoEspelho;
         destinoFundoEspelho.w = 800;

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="CarregaTextura.cpp" />
     <ClCompile Include="Objetos.cpp" />
     <ClCompile Include="Eventos.cpp" />
@@ -151,6 +152,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="CarregaTextura.h" />
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="Eventos.h" />
