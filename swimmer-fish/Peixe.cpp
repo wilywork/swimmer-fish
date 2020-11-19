@@ -14,11 +14,12 @@ Peixe SpawnPeixe(SDL_Renderer* renderizador, const char* textura, int tamanho, i
 
     SDL_Texture* texturaCarregada = CarregaTextura(textura, renderizador);
 
-    SDL_Rect destinoPeixe;
-    destinoPeixe.w = tamanho;
-    destinoPeixe.h = tamanho;
-    destinoPeixe.x = 50;
-    destinoPeixe.y = altura;
+    SDL_Rect destinoPeixe = {
+        tamanho,
+        tamanho,
+        50,
+        altura
+    };
 
     peixe.estrutura = destinoPeixe;
 
