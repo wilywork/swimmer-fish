@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CarregaTextura.cpp" />
+    <ClCompile Include="Coral.cpp" />
     <ClCompile Include="Eventos.cpp" />
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CarregaTextura.h" />
+    <ClInclude Include="Coral.h" />
     <ClInclude Include="Eventos.h" />
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="Menu.h" />

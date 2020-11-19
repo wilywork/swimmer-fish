@@ -10,6 +10,7 @@
 #include "Menu.h"
 #include "CarregaTextura.h"
 #include "Peixe.h"
+#include "Coral.h"
 
 
 using namespace std;
@@ -86,23 +87,6 @@ using namespace std;
         }
     }
 }*/
-
-void RectCoral(SDL_Renderer* renderizador, int TAMcoral, int coralMov, SDL_Rect destinoCoral) {
-
-    SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
-
-    destinoCoral.w = 40;
-    destinoCoral.h = TAMcoral * (404 / 122);
-    destinoCoral.x = 750 - (coralMov * 7);
-    destinoCoral.y = 600 - destinoCoral.h;
-    coralMov++;
-    if (destinoCoral.x <= -100) {
-        coralMov = 0;
-        TAMcoral = RandTamCoral();
-    }
-
-    SDL_RenderCopy(renderizador, coral, NULL, &destinoCoral);
-};
 
 
 // ============ FIM FUNCOES ============
@@ -251,8 +235,13 @@ int main()
 
 
         //coral
-        SDL_Rect destinoCoral;
-        RectCoral(renderizador, TAMcoral, coralMov, destinoCoral);
+        Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral,coralMov);
+
+        coralMov++;
+        if (coral.posicaoX <= -100) {
+            coralMov = 0;
+            TAMcoral = RandTamCoral();
+        }
 
         //comida
         SDL_Rect destinoComida;
@@ -279,7 +268,7 @@ int main()
             linhaMov = 0;
         }
 
-        if (TAMlinhaH == 200 || TAMlinhaH >= (destinoCoral.h + peixe.estrutura.h - 100)) {
+        if (TAMlinhaH == 200 || TAMlinhaH >= (coral.tamanhoH + peixe.estrutura.h - 100)) {
             valorDeCorrecao = -1;
         } else if (TAMlinhaH == 10) {
             valorDeCorrecao = 1;
@@ -349,7 +338,7 @@ int main()
 
         //HitBox
         HitBoxComida(destinoComida, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
-        HitBoxCoral(destinoCoral, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
         HitBoxLinha(destinoLinha, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
         HitBoxAnzol(destinoAnzol, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
 
