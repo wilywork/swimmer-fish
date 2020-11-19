@@ -115,7 +115,7 @@ int main()
    // SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
    // SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
    // SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
-    SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
+   // SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
     SDL_Texture* numeros = CarregaTextura("assets/imagens/numeros2.bmp", renderizador);
     SDL_Texture* scoreIMG = CarregaTextura("assets/imagens/score.bmp", renderizador);
     SDL_Texture* fundo1 = CarregaTextura("assets/imagens/parallax/fundo1.bmp", renderizador);
@@ -270,11 +270,6 @@ int main()
 
 
         //Azol
-        SDL_Rect destinoAnzol;
-        destinoAnzol.w = 25;
-        destinoAnzol.h = 25;
-        destinoAnzol.x = linha.posicaoX - 13;
-        destinoAnzol.y = linha.tamanhoH;
         Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
 
         //Numeros do score
@@ -331,7 +326,7 @@ int main()
         HitBoxComida(comida.estrutura, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
         HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
         HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxAnzol(destinoAnzol, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
 
         SDL_RenderPresent(renderizador); // Cola coisas na janela
         SDL_Delay(1000 / 60); // 60 fps
