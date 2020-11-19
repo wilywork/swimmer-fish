@@ -87,6 +87,23 @@ using namespace std;
     }
 }*/
 
+void RectCoral(SDL_Renderer* renderizador, int TAMcoral, int coralMov, SDL_Rect destinoCoral) {
+
+    SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
+
+    destinoCoral.w = 40;
+    destinoCoral.h = TAMcoral * (404 / 122);
+    destinoCoral.x = 750 - (coralMov * 7);
+    destinoCoral.y = 600 - destinoCoral.h;
+    coralMov++;
+    if (destinoCoral.x <= -100) {
+        coralMov = 0;
+        TAMcoral = RandTamCoral();
+    }
+
+    SDL_RenderCopy(renderizador, coral, NULL, &destinoCoral);
+};
+
 
 // ============ FIM FUNCOES ============
 int main()
@@ -109,9 +126,10 @@ int main()
 
 /*CarregaImagens(renderizador);*/
 
+
     SDL_Texture* fundo = CarregaTextura("assets/imagens/fundoJogo.bmp", renderizador);
    // SDL_Texture* peixe = CarregaTextura("assets/imagens/peixe.bmp", renderizador);
-    SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
+   // SDL_Texture* coral = CarregaTextura("assets/imagens/coral.bmp", renderizador);
     SDL_Texture* comida = CarregaTextura("assets/imagens/comida.bmp", renderizador);
     SDL_Texture* linha = CarregaTextura("assets/imagens/linha.bmp", renderizador);
     SDL_Texture* anzol = CarregaTextura("assets/imagens/anzol.bmp", renderizador);
@@ -234,16 +252,7 @@ int main()
 
         //coral
         SDL_Rect destinoCoral;
-        destinoCoral.w = 40;
-        destinoCoral.h = TAMcoral * (404 / 122);
-        destinoCoral.x =  750 - (coralMov * 7);
-        destinoCoral.y =  600 - destinoCoral.h;
-        coralMov++;
-        if (destinoCoral.x <= -100) {
-            coralMov = 0;
-            TAMcoral = RandTamCoral();
-        }
-        SDL_RenderCopy(renderizador, coral, NULL, &destinoCoral);
+        RectCoral(renderizador, TAMcoral, coralMov, destinoCoral);
 
         //comida
         SDL_Rect destinoComida;
