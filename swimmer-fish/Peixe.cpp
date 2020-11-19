@@ -31,3 +31,7 @@ Peixe SpawnPeixe(SDL_Renderer* renderizador, const char* textura, int tamanho, i
     return peixe;
 
 }
+
+void UpdatePeixe(SDL_Renderer* renderizador, Peixe peixe) {
+    SDL_RenderCopy(renderizador, texturaCarregada, NULL, &peixe.estrutura);
+}

@@ -72,6 +72,8 @@ int main()
 
     Menu(menuAtivo);
 
+    Peixe peixe = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", TAMpeixe, peixeMov);
+
     while (!gameOver) {
 
         FuncEventos(gameOver, peixeMov, pressUpPeixe);
@@ -85,61 +87,11 @@ int main()
             MOVfundo[0] = 0;
         }
 
-       // SpawnBackground(renderizador, [""]);
+       SpawnBackground(renderizador, MOVfundo[0]);
 
-        SDL_Rect destinoFundo2;
-        destinoFundo2.w = 800;
-        destinoFundo2.h = 353;
-        destinoFundo2.x = 0 + MOVfundo[0];
-        destinoFundo2.y = 100;
-        MOVfundo[0] -= 2;
+       peixe.estrutura.y = peixeMov * 4;
 
-        SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundo2);
-        SDL_Rect destinoFundoEspelho;
-        destinoFundoEspelho.w = 800;
-        destinoFundoEspelho.h = 353;
-        destinoFundoEspelho.x = 800 + MOVfundo[0];
-        destinoFundoEspelho.y = 100;
-        SDL_RenderCopy(renderizador, fundo2, NULL, &destinoFundoEspelho);
-        
-        //Fundo 3
-        if (MOVfundo[1] <= -800) {
-            MOVfundo[1] = 0;
-        }
-        SDL_Rect destinoFundo3;
-        destinoFundo3.w = 800;
-        destinoFundo3.h = 353;
-        destinoFundo3.x = 0 + MOVfundo[1];
-        destinoFundo3.y = 150;
-        MOVfundo[1] -= 3;
-        SDL_RenderCopy(renderizador, fundo3, NULL, &destinoFundo3);
-        SDL_Rect destinoFundo3Espelho;
-        destinoFundo3Espelho.w = 800;
-        destinoFundo3Espelho.h = 353;
-        destinoFundo3Espelho.x = 800 + MOVfundo[1];
-        destinoFundo3Espelho.y = 150;
-        SDL_RenderCopy(renderizador, fundo3, NULL, &destinoFundo3Espelho);
-
-
-        //Fundo 4
-        if (MOVfundo[2] <= -800) {
-            MOVfundo[2] = 0;
-        }
-        SDL_Rect destinoFundo4;
-        destinoFundo4.w = 800;
-        destinoFundo4.h = 400;
-        destinoFundo4.x = 0 + MOVfundo[2];
-        destinoFundo4.y = 200;
-        MOVfundo[2] -= 5;
-        SDL_RenderCopy(renderizador, fundo4, NULL, &destinoFundo4);
-        SDL_Rect destinoFundo4Espelho;
-        destinoFundo4Espelho.w = 800;
-        destinoFundo4Espelho.h = 400;
-        destinoFundo4Espelho.x = 800 + MOVfundo[2];
-        destinoFundo4Espelho.y = 200;
-        SDL_RenderCopy(renderizador, fundo4, NULL, &destinoFundo4Espelho);
-
-        Peixe peixe = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", TAMpeixe, peixeMov * 4);
+       UpdatePeixe(renderizador, peixe);
 
         if (peixe.estrutura.y >= 520) {
             peixe.estrutura.y = 520;

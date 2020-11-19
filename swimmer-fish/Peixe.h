@@ -11,4 +11,6 @@ typedef struct {
 
 Peixe SpawnPeixe(SDL_Renderer* renderizador, const char* textura, int tamanho, int altura);
 
+void UpdatePeixe(SDL_Renderer* renderizador, Peixe peixe);
+
 #endif // PEIXE_H

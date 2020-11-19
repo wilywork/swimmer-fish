@@ -4,26 +4,39 @@
 #include "Background.h"
 #include "CarregaTextura.h"
 
-void SpawnBackground(SDL_Renderer* renderizador, const char* texturas[], int total, int MOVfundo2) {
+const int quantidadeDeFundos = 4;
 
-    for (int i = 0; i < total; i++)
+const char* ImagensBackground[quantidadeDeFundos] = {
+    "assets/imagens/parallax/fundo1.bmp",
+    "assets/imagens/parallax/fundo2.bmp",
+    "assets/imagens/parallax/fundo3.bmp",
+    "assets/imagens/parallax/fundo4.1.bmp"
+};
+
+SDL_Texture* texturaCarregada[quantidadeDeFundos];
+
+void SpawnBackground(SDL_Renderer* renderizador, int movimento) {
+
+    for (int i = 0; i < quantidadeDeFundos; i++)
     {
-        SDL_Texture* texturaCarregada = CarregaTextura(texturas[i], renderizador);
+        if (!texturaCarregada[i]) {
+            texturaCarregada[i] = CarregaTextura(ImagensBackground[i], renderizador);
+        }
 
         SDL_Rect fundo;
         fundo.w = 800;
         fundo.h = 353;
-        fundo.x = 0 + MOVfundo2;
+        fundo.x = 0 + movimento + i;
         fundo.y = 100;
         
-        SDL_RenderCopy(renderizador, texturaCarregada, NULL, &fundo);
+        SDL_RenderCopy(renderizador, texturaCarregada[i], NULL, &fundo);
 
         SDL_Rect fundoDuplicado;
         fundoDuplicado.w = 800;
         fundoDuplicado.h = 353;
-        fundoDuplicado.x = 0 + MOVfundo2;
+        fundoDuplicado.x = 0 + movimento + i;
         fundoDuplicado.y = 100;
-        SDL_RenderCopy(renderizador, texturaCarregada, NULL, &fundoDuplicado);
+        SDL_RenderCopy(renderizador, texturaCarregada[i], NULL, &fundoDuplicado);
 
     }
 
