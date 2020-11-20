@@ -113,6 +113,9 @@ int main()
         UpdateCoral(renderizador, coral);
 
         //comida
+        if (coral.estrutura.x <= -100) {
+            coral.estrutura.x = 800;
+        }
         comida.estrutura.x = comida.estrutura.x - 3;
         UpdateComida(renderizador, comida);
         
