@@ -50,7 +50,6 @@ int main()
     int pressUpPeixe = false;
     int peixeMov = 0;
     int coralMov = 0;
-    int TAMpeixe = 100;
     int comidaMov = 0;
     int score = 0;
     int valorDeCorrecao = 1;
@@ -70,7 +69,7 @@ int main()
 
     Menu(menuAtivo);
 
-    Peixe peixe = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", TAMpeixe, peixeMov);
+    Peixe peixe = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", peixeMov);
     Placar placar = SpawnPlacar(renderizador, "assets/imagens/score.bmp");
     Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
 
@@ -83,7 +82,7 @@ int main()
 
         FuncEventos(gameOver, peixeMov, pressUpPeixe);
 
-        UpdateBackground(renderizador, -2);
+        UpdateBackground(renderizador, -1);
        
         peixe.estrutura.y = peixeMov * 4;
         UpdatePeixe(renderizador, peixe);
@@ -168,10 +167,12 @@ int main()
         UpdatePlacar(renderizador, placar);
 
         //HitBox
-        HitBoxComida(comida.estrutura, peixe.estrutura, TAMpeixe, comidaMov, score, comidaRandY, comidaMov);
-        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, TAMpeixe, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxComida(comida.estrutura, peixe.estrutura, comidaMov, score, comidaRandY, comidaMov);
+        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+
+
 
         SDL_RenderPresent(renderizador); // Cola coisas na janela
         SDL_Delay(1000 / 60); // 60 fps
