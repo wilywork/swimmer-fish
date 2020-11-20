@@ -49,12 +49,7 @@ int main()
 
     int pressUpPeixe = false;
     int peixeMov = 0;
-<<<<<<< HEAD
-    int coralMov = 0;
-    int score = 25;
-=======
     int score = 0;
->>>>>>> bac51bc2ad78796c654bc39f1ebccf3fcb437314
     int valorDeCorrecao = 1;
     int linhaMov = 0;
     int TAMlinhaH = 0;
