@@ -4,6 +4,8 @@
 #include "Placar.h"
 #include "CarregaTextura.h"
 
+using namespace std;
+
 Placar SpawnPlacar(SDL_Renderer* renderizador, const char* textura) {
 
     SDL_Rect destinoPlacar;
@@ -40,22 +42,22 @@ Numeros SpawnNumeros(SDL_Renderer* renderizador, const char* textura, int score,
     origemNumeros.y = 79 * NUM;
     origemNumeros.w = 62;
     origemNumeros.h = 79;
-    SDL_Rect destinoNumeros;
-    destinoNumeros.w = 33;
-    destinoNumeros.h = 33;
-    destinoNumeros.x = 750;
-    destinoNumeros.y = 20;
+    SDL_Rect estrutura;
+    estrutura.w = 33;
+    estrutura.h = 33;
+    estrutura.x = 750;
+    estrutura.y = 20;
 
     Numeros numeros;
-    numeros.tamanhoW = destinoNumeros.w;
-    numeros.tamanhoH = destinoNumeros.h;
-    numeros.posicaoX = destinoNumeros.x;
-    numeros.posicaoY = destinoNumeros.y;
+    numeros.tamanhoW = estrutura.w;
+    numeros.tamanhoH = estrutura.h;
+    numeros.posicaoX = estrutura.x;
+    numeros.posicaoY = estrutura.y;
     numeros.texturaCarregada = CarregaTextura(textura, renderizador);
 
 
 
-    numeros.estrutura = destinoNumeros;
+    numeros.estrutura = estrutura;
     numeros.origem = origemNumeros;
 
     numeros.texturaCarregada = CarregaTextura(textura, renderizador);
@@ -67,17 +69,79 @@ Numeros SpawnNumeros(SDL_Renderer* renderizador, const char* textura, int score,
 };
 
 void UpdateNumeros(SDL_Renderer* renderizador, Numeros numeros, int score) {
+
     int NUM = 0;
-    if (score >= 10) {
+    int scoreDezena = 0;
+    
+    if (score % 10 <= 4) {
+        NUM = 0;
+
+    }
+    if (score % 10 >= 5) {
         NUM = 1;
-        if ((score / 10) <= 4) {
-            NUM = 0;
-        }
-        if ((score / 10) >= 5) {
-            NUM = 1;
-        }
     }
     numeros.origem.x = 62 * (score % 5);
     numeros.origem.y = 79 * NUM;
     SDL_RenderCopy(renderizador, numeros.texturaCarregada, &numeros.origem, &numeros.estrutura);
+
+
 }
+
+
+Numeros2 SpawnNumeros2(SDL_Renderer* renderizador, const char* textura, int score, int NUM) {
+
+    SDL_Rect origemNumeros;
+    origemNumeros.x = 62 * (score % 5);
+    origemNumeros.y = 79 * NUM;
+    origemNumeros.w = 62;
+    origemNumeros.h = 79;
+
+    SDL_Rect estrutura;
+    estrutura.w = 33;
+    estrutura.h = 33;
+    estrutura.x = 720;
+    estrutura.y = 20;
+
+    Numeros2 numeros2;
+    numeros2.tamanhoW = estrutura.w;
+    numeros2.tamanhoH = estrutura.h;
+    numeros2.posicaoX = estrutura.x;
+    numeros2.posicaoY = estrutura.y;
+
+    numeros2.texturaCarregada = CarregaTextura(textura, renderizador);
+
+
+    numeros2.estrutura = estrutura;
+    numeros2.origem = origemNumeros;
+
+    numeros2.texturaCarregada = CarregaTextura(textura, renderizador);
+
+    SDL_RenderCopy(renderizador, numeros2.texturaCarregada, &numeros2.origem, &numeros2.estrutura);
+
+    return numeros2;
+
+};
+
+void UpdateNumeros2(SDL_Renderer* renderizador, Numeros2 numeros2, int score) {
+    int NUM = 0;
+    int scoreDezena = 0;
+
+    if (score >= 10) {
+        scoreDezena = score / 10;
+        if (scoreDezena <= 4) {
+            NUM = 0;
+
+        }
+        if (scoreDezena >= 5) {
+            NUM = 1;
+        }
+
+        numeros2.origem.x = 62 * scoreDezena;
+        numeros2.origem.y = 79 * NUM;
+
+
+        SDL_RenderCopy(renderizador, numeros2.texturaCarregada, &numeros2.origem, &numeros2.estrutura);
+    }
+};
+
+

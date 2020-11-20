@@ -50,7 +50,7 @@ int main()
     int pressUpPeixe = false;
     int peixeMov = 0;
     int coralMov = 0;
-    int score = 0;
+    int score = 25;
     int valorDeCorrecao = 1;
     int linhaMov = 0;
     int TAMlinhaH = 0;
@@ -75,6 +75,8 @@ int main()
     Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
     Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp", comidaRandY);
     Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral, coralMov);
+
+    Numeros2 numeros2 = SpawnNumeros2(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
 
     SpawnBackground(renderizador);
 
@@ -147,6 +149,7 @@ int main()
 
         //Numeros do score
         UpdateNumeros(renderizador, numeros, score);
+        UpdateNumeros2(renderizador, numeros2, score);
 
         // Placa de score
         UpdatePlacar(renderizador, placar);
