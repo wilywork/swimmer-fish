@@ -11,7 +11,7 @@ typedef struct {
 	SDL_Texture* texturaCarregada;
 } Comida;
 
-Comida SpawnComida(SDL_Renderer* renderizador, const char* textura, int comidaMov, int comidaRandY);
+Comida SpawnComida(SDL_Renderer* renderizador, const char* textura, int comidaRandY);
 
 void UpdateComida(SDL_Renderer* renderizador, Comida comida);
 

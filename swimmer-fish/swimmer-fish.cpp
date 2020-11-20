@@ -50,7 +50,6 @@ int main()
     int pressUpPeixe = false;
     int peixeMov = 0;
     int coralMov = 0;
-    int comidaMov = 0;
     int score = 0;
     int valorDeCorrecao = 1;
     int linhaMov = 0;
@@ -74,7 +73,7 @@ int main()
     Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
     Linha linha = SpawnLinha(renderizador, "assets/imagens/linha.bmp", TAMlinhaH, linhaMov);
     Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
-    Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp", comidaMov, comidaRandY);
+    Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp", comidaRandY);
     Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral, coralMov);
 
     SpawnBackground(renderizador);
@@ -115,14 +114,8 @@ int main()
         }
 
         //comida
+        comida.estrutura.x = comida.estrutura.x - 2;
         UpdateComida(renderizador, comida);
-
-        comidaMov++;
-        if (comida.posicaoX <= -100) {
-            comidaMov = 0;
-            comidaRandY = rand() % 550;
-        }
-
 
         //linha
         UpdateLinha(renderizador, linha);
@@ -159,10 +152,10 @@ int main()
         UpdatePlacar(renderizador, placar);
 
         //HitBox
-        HitBoxComida(comida.estrutura, peixe.estrutura, comidaMov, score, comidaRandY, comidaMov);
-        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
-        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, comidaMov, TAMcoral);
+        HitBoxComida(comida.estrutura, peixe.estrutura, score, comidaRandY);
+        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, TAMcoral);
+        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, TAMcoral);
+        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, TAMcoral);
 
 
 
