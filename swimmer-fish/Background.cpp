@@ -44,6 +44,8 @@ void SpawnBackground(SDL_Renderer* renderizador) {
 void UpdateBackground(SDL_Renderer* renderizador, int movimento) {
     for (int i = 0; i < quantidadeDeFundos; i++)
     {
+        movimento = movimento - i;
+
         if (estruturaFundo1[i].x <= -800) {
             estruturaFundo1[i].x = 0;
         }
