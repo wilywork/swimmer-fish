@@ -13,6 +13,8 @@ typedef struct {
 
 Comida SpawnComida(SDL_Renderer* renderizador, const char* textura, int comidaMov, int comidaRandY);
 
+void UpdateComida(SDL_Renderer* renderizador, Comida comida);
+
 typedef struct {
 	int tamanhoW;
 	int tamanhoH;
@@ -24,6 +26,8 @@ typedef struct {
 } Coral;
 
 Coral SpawnCoral(SDL_Renderer* renderizador, const char* textura, int TAMcoral, int coralMov);
+
+void UpdateCoral(SDL_Renderer* renderizador, Coral coral);
 
 typedef struct {
 	int tamanhoW;
@@ -37,6 +41,8 @@ typedef struct {
 
 Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura, int TAMlinhaH, int linhaMov);
 
+void UpdateLinha(SDL_Renderer* renderizador, Linha linha);
+
 typedef struct {
 	int tamanhoW;
 	int tamanhoH;
@@ -48,5 +54,7 @@ typedef struct {
 } Anzol;
 
 Anzol SpawnAnzol(SDL_Renderer* renderizador, const char* textura, Linha linha);
+
+void UpdateAnzol(SDL_Renderer* renderizador, Anzol anzol);
 
 #endif 

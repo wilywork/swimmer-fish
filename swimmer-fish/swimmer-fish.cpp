@@ -72,7 +72,10 @@ int main()
     Peixe peixe = SpawnPeixe(renderizador, "assets/imagens/peixe.bmp", peixeMov);
     Placar placar = SpawnPlacar(renderizador, "assets/imagens/score.bmp");
     Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
-
+    Linha linha = SpawnLinha(renderizador, "assets/imagens/linha.bmp", TAMlinhaH, linhaMov);
+    Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
+    Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp", comidaMov, comidaRandY);
+    Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral, coralMov);
 
     SpawnBackground(renderizador);
 
@@ -103,7 +106,7 @@ int main()
 
 
         //coral
-        Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral,coralMov);
+        UpdateCoral( renderizador, coral);
 
         coralMov++;
         if (coral.posicaoX <= -100) {
@@ -112,7 +115,7 @@ int main()
         }
 
         //comida
-        Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp", comidaMov, comidaRandY);
+        UpdateComida(renderizador, comida);
 
         comidaMov++;
         if (comida.posicaoX <= -100) {
@@ -122,7 +125,7 @@ int main()
 
 
         //linha
-        Linha linha = SpawnLinha(renderizador, "assets/imagens/linha.bmp", TAMlinhaH, linhaMov);
+        UpdateLinha(renderizador, linha);
         
         linhaMov++;
         if (linha.posicaoX <= -100) {
@@ -139,7 +142,7 @@ int main()
 
 
         //Azol
-        Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
+        UpdateAnzol(renderizador, anzol);
 
         //Numeros do score
         if (score % 10 <= 4) {
