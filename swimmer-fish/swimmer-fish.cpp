@@ -106,10 +106,11 @@ int main()
         UpdateCoral(renderizador, coral);
 
         //comida
-        if (coral.estrutura.x <= -100) {
-            coral.estrutura.x = 800;
+        if (comida.estrutura.x <= -100) {
+            comida.estrutura.y = rand() % 550;
+            comida.estrutura.x = 800;
         }
-        comida.estrutura.x = comida.estrutura.x - 3;
+        comida.estrutura.x = comida.estrutura.x - 50;
         UpdateComida(renderizador, comida);
         
         //linha
