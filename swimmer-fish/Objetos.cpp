@@ -17,16 +17,20 @@ Comida SpawnComida(SDL_Renderer* renderizador, const char* textura, int comidaMo
     comida.tamanhoH = destinoComida.h;
     comida.posicaoX = destinoComida.x;
     comida.posicaoY = destinoComida.y;
+    comida.texturaCarregada = CarregaTextura(textura, renderizador);
 
     comida.estrutura = destinoComida;
 
-    comida.texturaCarregada = CarregaTextura(textura, renderizador);
 
     SDL_RenderCopy(renderizador, comida.texturaCarregada, NULL, &destinoComida);
 
     return comida;
 
 };
+
+void UpdateComida(SDL_Renderer* renderizador, Comida comida) {
+    SDL_RenderCopy(renderizador, comida.texturaCarregada, NULL, &comida.estrutura);
+}
 
 Coral SpawnCoral(SDL_Renderer* renderizador, const char* textura, int TAMcoral, int coralMov) {
 
@@ -52,6 +56,10 @@ Coral SpawnCoral(SDL_Renderer* renderizador, const char* textura, int TAMcoral, 
 
 };
 
+void UpdateCoral(SDL_Renderer* renderizador, Coral coral) {
+    SDL_RenderCopy(renderizador, coral.texturaCarregada, NULL, &coral.estrutura);
+}
+
 Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura,int TAMlinhaH, int linhaMov) {
 
     SDL_Rect destinoLinha;
@@ -76,6 +84,10 @@ Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura,int TAMlinhaH, 
 
 };
 
+void UpdateLinha(SDL_Renderer* renderizador, Linha linha) {
+    SDL_RenderCopy(renderizador, linha.texturaCarregada, NULL, &linha.estrutura);
+}
+
 Anzol SpawnAnzol(SDL_Renderer* renderizador, const char* textura, Linha linha) {
 
     SDL_Rect destinoAnzol;
@@ -99,3 +111,7 @@ Anzol SpawnAnzol(SDL_Renderer* renderizador, const char* textura, Linha linha) {
     return anzol;
 
 };
+
+void UpdateAnzol(SDL_Renderer* renderizador, Anzol anzol) {
+    SDL_RenderCopy(renderizador, anzol.texturaCarregada, NULL, &anzol.estrutura);
+}

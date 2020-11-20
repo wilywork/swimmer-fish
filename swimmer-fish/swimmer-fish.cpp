@@ -74,6 +74,7 @@ int main()
     Placar placar = SpawnPlacar(renderizador, "assets/imagens/score.bmp");
     Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
 
+
     SpawnBackground(renderizador);
 
     while (!gameOver) {
