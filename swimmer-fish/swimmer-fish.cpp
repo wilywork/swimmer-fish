@@ -144,27 +144,16 @@ int main()
         //Azol
         UpdateAnzol(renderizador, anzol);
 
+        //if (score % 10 <= 4) {
+        //    NUM = 0;
+
+        //}
+        //if (score % 10 >= 5) {
+        //    NUM = 1;
+        //}
+
         //Numeros do score
-        if (score % 10 <= 4) {
-            NUM = 0;
-
-        }
-        if (score % 10 >= 5) {
-            NUM = 1;
-        }
-        UpdateNumeros(renderizador, numeros);
-
-        if (score >= 10) {
-            scoreDezena = score / 10;
-            if (scoreDezena <= 4) {
-                NUM = 0;
-
-            }
-            if (scoreDezena >= 5) {
-                NUM = 1;
-            }
-            UpdateNumeros(renderizador, numeros);
-        }
+        UpdateNumeros(renderizador, numeros, score);
 
         // Placa de score
         UpdatePlacar(renderizador, placar);

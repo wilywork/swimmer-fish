@@ -66,6 +66,18 @@ Numeros SpawnNumeros(SDL_Renderer* renderizador, const char* textura, int score,
 
 };
 
-void UpdateNumeros(SDL_Renderer* renderizador, Numeros numeros) {
+void UpdateNumeros(SDL_Renderer* renderizador, Numeros numeros, int score) {
+    int NUM = 0;
+    if (score >= 10) {
+        NUM = 1;
+        if ((score / 10) <= 4) {
+            NUM = 0;
+        }
+        if ((score / 10) >= 5) {
+            NUM = 1;
+        }
+    }
+    numeros.origem.x = 62 * (score % 5);
+    numeros.origem.y = 79 * NUM;
     SDL_RenderCopy(renderizador, numeros.texturaCarregada, &numeros.origem, &numeros.estrutura);
 }
