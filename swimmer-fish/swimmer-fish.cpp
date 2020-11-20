@@ -49,7 +49,6 @@ int main()
 
     int pressUpPeixe = false;
     int peixeMov = 0;
-    int coralMov = 0;
     int score = 0;
     int valorDeCorrecao = 1;
     int linhaMov = 0;
@@ -73,7 +72,7 @@ int main()
     Linha linha = SpawnLinha(renderizador, "assets/imagens/linha.bmp", TAMlinhaH, linhaMov);
     Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
     Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp");
-    Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral, coralMov);
+    Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral);
 
     SpawnBackground(renderizador);
 
@@ -104,16 +103,16 @@ int main()
 
 
         //coral
-        UpdateCoral( renderizador, coral);
-
-        coralMov++;
-        if (coral.posicaoX <= -100) {
-            coralMov = 0;
-            TAMcoral = RandTamCoral();
+        if (coral.estrutura.x <= -100) {
+            coral.estrutura.h = (rand() % 250) + 50;
+            coral.estrutura.x = 800;
+            coral.estrutura.y = 600 - coral.estrutura.h;
         }
+        coral.estrutura.x = coral.estrutura.x - 5;
+        UpdateCoral(renderizador, coral);
 
         //comida
-        comida.estrutura.x = comida.estrutura.x - 2;
+        comida.estrutura.x = comida.estrutura.x - 3;
         UpdateComida(renderizador, comida);
 
         //linha
@@ -152,9 +151,9 @@ int main()
 
         //HitBox
         HitBoxComida(comida.estrutura, peixe.estrutura, score);
-        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, coralMov, linhaMov, TAMcoral);
-        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, coralMov, linhaMov, TAMcoral);
-        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, coralMov, linhaMov, TAMcoral);
+        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, linhaMov, TAMcoral);
+        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, linhaMov, TAMcoral);
+        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, linhaMov, TAMcoral);
 
 
 

@@ -33,12 +33,12 @@ void UpdateComida(SDL_Renderer* renderizador, Comida comida) {
 }
 
 
-Coral SpawnCoral(SDL_Renderer* renderizador, const char* textura, int TAMcoral, int coralMov) {
+Coral SpawnCoral(SDL_Renderer* renderizador, const char* textura, int TAMcoral) {
 
     SDL_Rect destinoCoral;
     destinoCoral.w = 40;
     destinoCoral.h = TAMcoral * (404 / 122);
-    destinoCoral.x = 750 - (coralMov * 7);
+    destinoCoral.x = 750;
     destinoCoral.y = 600 - destinoCoral.h;
 
     Coral coral;

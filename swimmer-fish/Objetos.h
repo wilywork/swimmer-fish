@@ -25,7 +25,7 @@ typedef struct {
 	SDL_Texture* texturaCarregada;
 } Coral;
 
-Coral SpawnCoral(SDL_Renderer* renderizador, const char* textura, int TAMcoral, int coralMov);
+Coral SpawnCoral(SDL_Renderer* renderizador, const char* textura, int TAMcoral);
 
 void UpdateCoral(SDL_Renderer* renderizador, Coral coral);
 
