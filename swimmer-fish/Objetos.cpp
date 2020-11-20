@@ -4,13 +4,13 @@
 #include "Objetos.h"
 #include "CarregaTextura.h"
 
-Comida SpawnComida(SDL_Renderer* renderizador, const char* textura, int comidaRandY) {
+Comida SpawnComida(SDL_Renderer* renderizador, const char* textura) {
 
     SDL_Rect destinoComida;
     destinoComida.w = 10;
     destinoComida.h = 10;
     destinoComida.x = 800;
-    destinoComida.y = comidaRandY;
+    destinoComida.y = rand() % 550;
 
     Comida comida;
     comida.tamanhoW = destinoComida.w;

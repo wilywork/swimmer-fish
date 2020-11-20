@@ -54,7 +54,6 @@ int main()
     int valorDeCorrecao = 1;
     int linhaMov = 0;
     int TAMlinhaH = 0;
-    int comidaRandY = 250;
     int TAMcoral = 30;
     int NUM = 0;
     int scoreDezena = 0;
@@ -73,7 +72,7 @@ int main()
     Numeros numeros = SpawnNumeros(renderizador, "assets/imagens/numeros2.bmp", score, NUM);
     Linha linha = SpawnLinha(renderizador, "assets/imagens/linha.bmp", TAMlinhaH, linhaMov);
     Anzol anzol = SpawnAnzol(renderizador, "assets/imagens/anzol.bmp", linha);
-    Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp", comidaRandY);
+    Comida comida = SpawnComida(renderizador, "assets/imagens/comida.bmp");
     Coral coral = SpawnCoral(renderizador, "assets/imagens/coral.bmp", TAMcoral, coralMov);
 
     SpawnBackground(renderizador);
@@ -152,10 +151,10 @@ int main()
         UpdatePlacar(renderizador, placar);
 
         //HitBox
-        HitBoxComida(comida.estrutura, peixe.estrutura, score, comidaRandY);
-        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, TAMcoral);
-        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, TAMcoral);
-        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, comidaRandY, coralMov, linhaMov, TAMcoral);
+        HitBoxComida(comida.estrutura, peixe.estrutura, score);
+        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, coralMov, linhaMov, TAMcoral);
+        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, coralMov, linhaMov, TAMcoral);
+        HitBoxAnzol(anzol.estrutura, peixe.estrutura, peixeMov, score, coralMov, linhaMov, TAMcoral);
 
 
 
