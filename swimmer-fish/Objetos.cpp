@@ -62,12 +62,12 @@ void UpdateCoral(SDL_Renderer* renderizador, Coral coral) {
 }
 
 
-Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura,int TAMlinhaH, int linhaMov) {
+Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura) {
 
     SDL_Rect destinoLinha;
-    destinoLinha.w = 3;
-    destinoLinha.h = 10 + TAMlinhaH;// (TAMlinhaH * 4);
-    destinoLinha.x = 850 - linhaMov;// (linhaMov * 3);
+    destinoLinha.w = 5;
+    destinoLinha.h = 50;
+    destinoLinha.x = 850;
     destinoLinha.y = 0;
 
     Linha linha;
@@ -88,33 +88,4 @@ Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura,int TAMlinhaH, 
 
 void UpdateLinha(SDL_Renderer* renderizador, Linha linha) {
     SDL_RenderCopy(renderizador, linha.texturaCarregada, NULL, &linha.estrutura);
-}
-
-
-Anzol SpawnAnzol(SDL_Renderer* renderizador, const char* textura, Linha linha) {
-
-    SDL_Rect destinoAnzol;
-    destinoAnzol.w = 25;
-    destinoAnzol.h = 25;
-    destinoAnzol.x = linha.posicaoX - 13;
-    destinoAnzol.y = linha.tamanhoH;
-
-    Anzol anzol;
-    anzol.tamanhoW = destinoAnzol.w;
-    anzol.tamanhoH = destinoAnzol.h;
-    anzol.posicaoX = destinoAnzol.x;
-    anzol.posicaoY = destinoAnzol.y;
-
-    anzol.estrutura = destinoAnzol;
-
-    anzol.texturaCarregada = CarregaTextura(textura, renderizador);
-
-    SDL_RenderCopy(renderizador, anzol.texturaCarregada, NULL, &destinoAnzol);
-
-    return anzol;
-
-};
-
-void UpdateAnzol(SDL_Renderer* renderizador, Anzol anzol) {
-    SDL_RenderCopy(renderizador, anzol.texturaCarregada, NULL, &anzol.estrutura);
 }

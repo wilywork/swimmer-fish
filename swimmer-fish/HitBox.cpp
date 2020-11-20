@@ -48,7 +48,6 @@ void HitBoxComida(SDL_Rect &destinoComida, SDL_Rect &destinoPeixe, int& score) {
                     destinoComida.x = 800;
 
                     score++;
-                    cout << "Score:" << score << endl;
                 }
             }
         }
@@ -60,18 +59,6 @@ void HitBoxLinha(SDL_Rect destinoLinha, SDL_Rect &destinoPeixe, int& peixeMov, i
         if (destinoPeixe.y < destinoLinha.y + destinoLinha.h) {
             if (destinoPeixe.x + destinoPeixe.w > destinoLinha.x) {
                 if (destinoPeixe.x < destinoLinha.x + destinoLinha.w) {
-                    reset(destinoPeixe, peixeMov, score, linhaMOV, TAMcoral);
-                }
-            }
-        }
-    }
-};
-
-void HitBoxAnzol(SDL_Rect destinoAnzol, SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& linhaMOV, int& TAMcoral) {
-    if (destinoPeixe.y + destinoPeixe.h > destinoAnzol.y) {
-        if (destinoPeixe.y < destinoAnzol.y + destinoAnzol.h) {
-            if (destinoPeixe.x + destinoPeixe.w > destinoAnzol.x) {
-                if (destinoPeixe.x < destinoAnzol.x + destinoAnzol.w) {
                     reset(destinoPeixe, peixeMov, score, linhaMOV, TAMcoral);
                 }
             }

@@ -39,22 +39,9 @@ typedef struct {
 	SDL_Texture* texturaCarregada;
 } Linha;
 
-Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura, int TAMlinhaH, int linhaMov);
+Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura);
 
 void UpdateLinha(SDL_Renderer* renderizador, Linha linha);
 
-typedef struct {
-	int tamanhoW;
-	int tamanhoH;
-	int posicaoX;
-	int posicaoY;
-	const char* textura;
-	SDL_Rect estrutura;
-	SDL_Texture* texturaCarregada;
-} Anzol;
-
-Anzol SpawnAnzol(SDL_Renderer* renderizador, const char* textura, Linha linha);
-
-void UpdateAnzol(SDL_Renderer* renderizador, Anzol anzol);
 
 #endif 
