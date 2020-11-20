@@ -7,7 +7,7 @@ int RandTamCoral();
 
 void HitBoxCoral(SDL_Rect destinoCoral, SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& comidaRandX, int& coralMov, int& linhaMOV, int& TAMcoral);
 
-void HitBoxComida(SDL_Rect destinoComida, SDL_Rect &destinoPeixe, int& score, int& comidaRandY);
+void HitBoxComida(SDL_Rect &destinoComida, SDL_Rect &destinoPeixe, int& score, int& comidaRandY);
 
 void HitBoxLinha(SDL_Rect destinoLinha, SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& comidaRandX, int& coralMov, int& linhaMOV, int& TAMcoral);
 

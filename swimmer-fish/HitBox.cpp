@@ -33,7 +33,7 @@ void HitBoxCoral(SDL_Rect destinoCoral, SDL_Rect &destinoPeixe, int& peixeMov, i
     }
 };
 
-void HitBoxComida(SDL_Rect destinoComida, SDL_Rect &destinoPeixe, int& score, int& comidaRandY) {
+void HitBoxComida(SDL_Rect &destinoComida, SDL_Rect &destinoPeixe, int& score, int& comidaRandY) {
     if (destinoPeixe.y + destinoPeixe.h > destinoComida.y) {
         if (destinoPeixe.y < destinoComida.y + destinoComida.h) {
             if (destinoPeixe.x + destinoPeixe.w > destinoComida.x) {
@@ -44,9 +44,7 @@ void HitBoxComida(SDL_Rect destinoComida, SDL_Rect &destinoPeixe, int& score, in
                     destinoPeixe.h += 5;
 
                     //por comida novamente
-                    if (destinoComida.x <= -100) {
-                        destinoComida.x = rand() % 550;
-                    }
+                    destinoComida.y = rand() % 550;
                     destinoComida.x = 800;
 
                     score++;
