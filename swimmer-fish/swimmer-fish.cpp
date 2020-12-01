@@ -50,6 +50,7 @@ int main()
     int NUM = 0;
     int scoreDezena = 0;
     int MOVfundo[3] = {};
+    bool linhaUp = true;
 
     SDL_RenderCopy(renderizador, CarregaTextura("assets/imagens/parallax/menu.bmp", renderizador), NULL, NULL);
 
@@ -115,10 +116,16 @@ int main()
         UpdateComida(renderizador, comida);
         
         //linha
-        if (linha.estrutura.h == 200 || linha.estrutura.h >= (coral.estrutura.h + peixe.estrutura.h - 100)) {
-            valorDeCorrecao = -1;
-        } else if (linha.estrutura.h == 10) {
-            valorDeCorrecao = 1;
+        if ((linha.estrutura.h <= ( 500 - (coral.estrutura.h + peixe.estrutura.h))) && (linhaUp == true)) {
+            valorDeCorrecao = +1;
+        } 
+        else  {
+            valorDeCorrecao = -1 ;
+            linhaUp = false;
+        }
+        if (linha.estrutura.h <= 10) {
+            linhaUp = true;
+
         }
 
         if (linha.estrutura.x <= 0) {
