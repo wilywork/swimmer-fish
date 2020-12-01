@@ -65,7 +65,7 @@ void UpdateCoral(SDL_Renderer* renderizador, Coral coral) {
 Linha SpawnLinha(SDL_Renderer* renderizador, const char* textura) {
 
     SDL_Rect destinoLinha;
-    destinoLinha.w = 5;
+    destinoLinha.w = 20;
     destinoLinha.h = 50;
     destinoLinha.x = 850;
     destinoLinha.y = 0;

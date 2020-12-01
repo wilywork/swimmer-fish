@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <time.h>
 
+
 using namespace std;
 
 int RandTamCoral() {
@@ -12,22 +13,22 @@ int RandTamCoral() {
     }
 };
 
-void reset(SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& linhaMOV, int& TAMcoral) {
+void reset(SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& linhaMOV, int& TAMcoral, SDL_Rect& destinoCoral, SDL_Rect& destinoLinha) {
     peixeMov = 0;
     score = 0;
     destinoPeixe.w = 100;
     destinoPeixe.h = 100;
-    //zerar comida aqui
-    //zerar coral aqui
+    destinoCoral.x = 800;
+    destinoLinha.x = 900;
     linhaMOV = 0;
     TAMcoral = RandTamCoral();
 };
 
-void HitBoxCoral(SDL_Rect destinoCoral, SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& linhaMOV, int& TAMcoral) {
+void HitBoxCoral(SDL_Rect &destinoCoral, SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& linhaMOV, int& TAMcoral, SDL_Rect& destinoLinha) {
     if (destinoPeixe.y + destinoPeixe.h > destinoCoral.y + 10) {
         if (destinoPeixe.x + destinoPeixe.w > destinoCoral.x + 5) {
             if (destinoPeixe.x < destinoCoral.x + destinoCoral.w) {
-                reset(destinoPeixe, peixeMov, score, linhaMOV, TAMcoral);
+                reset(destinoPeixe, peixeMov, score, linhaMOV, TAMcoral, destinoCoral, destinoLinha);
             }
         }
     }
@@ -54,12 +55,12 @@ void HitBoxComida(SDL_Rect &destinoComida, SDL_Rect &destinoPeixe, int& score) {
     }
 };
 
-void HitBoxLinha(SDL_Rect destinoLinha, SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& linhaMOV, int& TAMcoral) {
+void HitBoxLinha(SDL_Rect &destinoLinha, SDL_Rect &destinoPeixe, int& peixeMov, int& score, int& linhaMOV, int& TAMcoral, SDL_Rect& destinoCoral) {
     if (destinoPeixe.y + destinoPeixe.h > destinoLinha.y) {
         if (destinoPeixe.y < destinoLinha.y + destinoLinha.h) {
             if (destinoPeixe.x + destinoPeixe.w > destinoLinha.x) {
                 if (destinoPeixe.x < destinoLinha.x + destinoLinha.w) {
-                    reset(destinoPeixe, peixeMov, score, linhaMOV, TAMcoral);
+                    reset(destinoPeixe, peixeMov, score, linhaMOV, TAMcoral, destinoCoral ,destinoLinha);
                 }
             }
         }

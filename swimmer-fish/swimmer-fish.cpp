@@ -106,11 +106,12 @@ int main()
         UpdateCoral(renderizador, coral);
 
         //comida
+
+        comida.estrutura.x = comida.estrutura.x - 10;
         if (comida.estrutura.x <= -100) {
             comida.estrutura.y = rand() % 550;
             comida.estrutura.x = 800;
         }
-        comida.estrutura.x = comida.estrutura.x - 50;
         UpdateComida(renderizador, comida);
         
         //linha
@@ -124,8 +125,8 @@ int main()
             linha.estrutura.x = 850;
         }
 
-        linha.estrutura.h = linha.estrutura.h + valorDeCorrecao;
-        linha.estrutura.x = linha.estrutura.x - 5;
+        linha.estrutura.h += valorDeCorrecao;
+        linha.estrutura.x += - 5;
         UpdateLinha(renderizador, linha);
 
         //Numeros do score
@@ -137,8 +138,9 @@ int main()
 
         //HitBox
         HitBoxComida(comida.estrutura, peixe.estrutura, score);
-        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, linhaMov, TAMcoral);
-        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, linhaMov, TAMcoral);
+        HitBoxCoral(coral.estrutura, peixe.estrutura, peixeMov, score, linhaMov, TAMcoral, linha.estrutura);
+        HitBoxLinha(linha.estrutura, peixe.estrutura, peixeMov, score, linhaMov, TAMcoral, coral.estrutura);
+
 
 
 
